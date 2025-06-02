@@ -6,9 +6,11 @@ import { NextResponse } from 'next/server';
 export async function GET(request, { params }) {
     try {
         await connectDB();
+        
+        const { slug } = await params;
 
         const blogPost = await Blog.findOne({ 
-            slug: params.slug, 
+            slug: slug, 
             isPublished: true 
         }).select('-author');
 
