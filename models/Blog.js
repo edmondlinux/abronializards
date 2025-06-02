@@ -67,7 +67,22 @@ const BlogSchema = new mongoose.Schema({
     isPublished: {
         type: Boolean,
         default: true
-    }
+    },
+    upvotes: {
+        type: Number,
+        default: 0
+    },
+    downvotes: {
+        type: Number,
+        default: 0
+    },
+    voters: [{
+        userId: String,
+        voteType: {
+            type: String,
+            enum: ['upvote', 'downvote']
+        }
+    }]
 }, {
     timestamps: true
 });

@@ -2,13 +2,16 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '@/context/AppContext';
+import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VoteButtons from '@/components/VoteButtons';
 
 const BlogList = () => {
     const { router } = useAppContext();
+    const { user } = useUser();
     const [blogPosts, setBlogPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
@@ -206,7 +209,7 @@ const BlogList = () => {
                                         {post.excerpt}
                                     </p>
                                     
-                                    <div className="flex items-center justify-between">
+                                    <div className="flex items-center justify-between mb-3">
                                         <time className="text-gray-500 text-sm">
                                             {formatDate(post.publishDate)}
                                         </time>
@@ -216,6 +219,16 @@ const BlogList = () => {
                                         >
                                             Read More →
                                         </Link>
+                                    </div>
+                                    
+                                    {/* Vote Buttons */}
+                                    <div className="pt-3 border-t border-gray-100">
+                                        <VoteButtons 
+                                            blogId={post._id}
+                                            initialUpvotes={post.upvotes || 0}
+                                            initialDownvotes={post.downvotes || 0}
+                                            initialUserVote={post.userVote || null}
+                                        />
                                     </div>
                                 </div>
                             </article>

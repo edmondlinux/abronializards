@@ -1,6 +1,7 @@
 
 import connectDB from '@/config/db';
 import Blog from '@/models/Blog';
+import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -23,17 +24,31 @@ export async function GET(request) {
 
         const skip = (page - 1) * limit;
 
+        const { userId } = auth();
+        
         const blogPosts = await Blog.find(filter)
             .sort({ publishDate: -1 })
             .skip(skip)
             .limit(limit)
             .select('-author'); // Don't expose author info
 
+        // Add user vote information if user is authenticated
+        const postsWithVoteInfo = blogPosts.map(post => {
+            const postObj = post.toObject();
+            if (userId) {
+                const userVoteRecord = post.voters.find(voter => voter.userId === userId);
+                postObj.userVote = userVoteRecord ? userVoteRecord.voteType : null;
+            }
+            // Remove voters array from response for privacy
+            delete postObj.voters;
+            return postObj;
+        });
+
         const total = await Blog.countDocuments(filter);
 
         return NextResponse.json({ 
             success: true, 
-            blogPosts,
+            blogPosts: postsWithVoteInfo,
             pagination: {
                 currentPage: page,
                 totalPages: Math.ceil(total / limit),

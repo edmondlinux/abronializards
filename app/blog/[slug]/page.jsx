@@ -3,14 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
+import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VoteButtons from '@/components/VoteButtons';
 
 const BlogPost = () => {
     const params = useParams();
     const { router } = useAppContext();
+    const { user } = useUser();
     const [blogPost, setBlogPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -154,6 +157,19 @@ const BlogPost = () => {
                                 {blogPost.excerpt}
                             </div>
                         )}
+
+                        {/* Vote Buttons */}
+                        <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium text-gray-700">Was this helpful?</span>
+                                <VoteButtons 
+                                    blogId={blogPost._id}
+                                    initialUpvotes={blogPost.upvotes || 0}
+                                    initialDownvotes={blogPost.downvotes || 0}
+                                    initialUserVote={blogPost.userVote || null}
+                                />
+                            </div>
+                        </div>
 
                         {/* Content */}
                         <div className="prose prose-lg max-w-none">
