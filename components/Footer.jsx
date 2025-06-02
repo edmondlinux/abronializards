@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 
 const Footer = () => {
+  const [footerEmail, setFooterEmail] = useState('');
+  const [footerLoading, setFooterLoading] = useState(false);
+  const [footerMessage, setFooterMessage] = useState('');
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setFooterLoading(true);
+    setFooterMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: footerEmail,
+          source: 'footer'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFooterMessage(data.message);
+        setFooterEmail('');
+      } else {
+        setFooterMessage(data.message);
+      }
+    } catch (error) {
+      setFooterMessage('Something went wrong. Please try again.');
+    } finally {
+      setFooterLoading(false);
+    }
+  };
   return (
     <footer className="bg-gradient-to-br from-slate-50 to-gray-100 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,16 +140,29 @@ const Footer = () => {
               Get the latest care guides and species updates delivered to your
               inbox.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
+                value={footerEmail}
+                onChange={(e) => setFooterEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
+                required
+                disabled={footerLoading}
               />
-              <button className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium">
-                Subscribe
+              <button 
+                type="submit"
+                disabled={footerLoading}
+                className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {footerLoading ? 'Subscribing...' : 'Subscribe'}
               </button>
-            </div>
+            </form>
+            {footerMessage && (
+              <p className={`mt-2 text-sm ${footerMessage.includes('Successfully') ? 'text-emerald-600' : 'text-red-600'}`}>
+                {footerMessage}
+              </p>
+            )}
           </div>
         </div>
       </div>

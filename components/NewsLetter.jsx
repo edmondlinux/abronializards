@@ -1,6 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 const NewsLetter = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          source: 'newsletter'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage(data.message);
+        setEmail('');
+      } else {
+        setMessage(data.message);
+      }
+    } catch (error) {
+      setMessage('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="relative bg-gradient-to-br from-slate-50 to-emerald-50 py-16 md:py-20 overflow-hidden">
       {/* Background Decorative Elements */}
@@ -25,26 +60,47 @@ const NewsLetter = () => {
 
         {/* Enhanced input section */}
         <div className="w-full max-w-2xl mt-8">
-          <div className="relative flex items-center bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <form onSubmit={handleSubmit} className="relative flex items-center bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <div className="relative flex-1">
               <input
                 className="w-full h-14 md:h-16 px-6 text-gray-700 placeholder-gray-400 bg-transparent outline-none focus:ring-0 border-none"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
+                required
+                disabled={loading}
               />
               <div className="absolute inset-0 border-2 border-transparent rounded-l-xl focus-within:border-emerald-300 transition-colors duration-300 pointer-events-none"></div>
             </div>
 
-            <button className="relative group h-14 md:h-16 px-8 md:px-12 text-white font-semibold bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden">
+            <button 
+              type="submit"
+              disabled={loading}
+              className="relative group h-14 md:h-16 px-8 md:px-12 text-white font-semibold bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               <span className="relative z-10 flex items-center gap-2">
-                Subscribe
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                {loading ? 'Subscribing...' : 'Subscribe'}
+                {!loading && (
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                )}
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </button>
-          </div>
+          </form>
+
+          {/* Success/Error Message */}
+          {message && (
+            <div className={`mt-4 p-4 rounded-lg text-center ${
+              message.includes('Successfully') 
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                : 'bg-red-50 text-red-700 border border-red-200'
+            }`}>
+              {message}
+            </div>
+          )}
 
           {/* Trust indicators */}
           <div className="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
