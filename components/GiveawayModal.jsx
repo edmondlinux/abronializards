@@ -1,4 +1,6 @@
 
+"use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
@@ -215,7 +217,7 @@ const GiveawayModal = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
+                  className="w-full px-4 md:h-16 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-base"
                   required
                   disabled={loading}
                 />
@@ -227,7 +229,7 @@ const GiveawayModal = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your Email Address"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-base"
                   required
                   disabled={loading}
                 />

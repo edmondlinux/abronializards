@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeaderSlider = () => {
   const sliderData = [
@@ -11,6 +12,7 @@ const HeaderSlider = () => {
       buttonText1: "Learn More",
       buttonText2: "View Gallery",
       imgSrc: assets.header_abronia_graminea_image,
+      slug: "blog/abronia-graminea"
     },
     {
       id: 2,
@@ -19,6 +21,7 @@ const HeaderSlider = () => {
       buttonText1: "Explore Now",
       buttonText2: "Care Guide",
       imgSrc: assets.header_abronia_lythrochila_image,
+      slug: "blog/abronia-lythrochila"
     },
     {
       id: 3,
@@ -27,6 +30,7 @@ const HeaderSlider = () => {
       buttonText1: "Discover More",
       buttonText2: "Conservation Info",
       imgSrc: assets.header_abronia_oaxacae_image,
+      slug: "blog/abronia-oaxacae"
     },
   ];
 
@@ -62,13 +66,20 @@ const HeaderSlider = () => {
                 {slide.title}
               </h1>
               <div className="flex items-center mt-4 md:mt-6 ">
-                <button className="md:px-10 px-7 md:py-2.5 py-2 bg-green-600 rounded-full text-white font-medium hover:bg-green-700 transition">
-                  {slide.buttonText1}
-                </button>
-                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium hover:text-green-600 transition">
-                  {slide.buttonText2}
-                  <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
-                </button>
+
+                <div className="flex items-center mt-4 md:mt-6 ">
+                  <Link href={`/${slide.slug}`}>
+                    <button className="md:px-10 px-7 md:py-2.5 py-2 bg-green-600 rounded-full text-white font-medium hover:bg-green-700 transition">
+                      {slide.buttonText1}
+                    </button>
+                  </Link>
+                  <Link href={`/${slide.slug}`}>
+                    <button className="group flex items-center gap-2 px-6 py-2.5 font-medium hover:text-green-600 transition">
+                      {slide.buttonText2}
+                      <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="flex items-center flex-1 justify-center">

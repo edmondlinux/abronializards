@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getUserCurrency } from '@/utils/currencyUtils'; // adjust path as needed
+import { useClerk } from "@clerk/nextjs"
+
+    
 
 export const AppContext = createContext();
 
@@ -19,6 +22,7 @@ export const AppContextProvider = (props) => {
 
     const { user } = useUser()
     const { getToken } = useAuth()
+    const { openSignIn } = useClerk() ;
 
     const [products, setProducts] = useState([])
     const [userData, setUserData] = useState(false)
@@ -68,12 +72,12 @@ export const AppContextProvider = (props) => {
 
 
         if (!user) {
-            toast('Please login first', {
+            toast.error('Please login first', {
                 icon: '⚠️',
             });
             setTimeout(() => {
-                router.push('/sign-in');
-            }, 2000);
+                openSignIn();
+            }, 500); 
             return;
         }
 
