@@ -11,6 +11,7 @@ const Footer = () => {
     e.preventDefault();
     setFooterLoading(true);
     setFooterMessage('');
+  
 
     try {
       const response = await fetch('/api/newsletter/subscribe', {
@@ -84,10 +85,10 @@ const Footer = () => {
               <ul className="space-y-3">
                 {[
                   { name: "Home", href: "/" },
-                  { name: "Species Info", href: "/abronia-species-info" },
-                  { name: "Care Guides", href: "/abronia-care-sheet" },
+                  { name: "Species Info", href:  "blog/abronia-species-info" },
+                  { name: "Care Guides", href: "blog/abronia-care-sheet" },
                   { name: "Shop", href: "/shop" },
-                  { name: "Shipping & Returns", href: "/shipping-and-returns" },
+                  { name: "Shipping & Returns", href: "blog/shipping-and-returns" },
                   { name: "Contact Us", href: "#" },
                 ].map((link) => (
                   <li key={link.name}>
