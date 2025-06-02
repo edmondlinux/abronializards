@@ -51,6 +51,13 @@ const BlogPost = () => {
         });
     };
 
+    // Update document title when blog post loads
+    useEffect(() => {
+        if (blogPost?.title) {
+            document.title = blogPost.title;
+        }
+    }, [blogPost]);
+
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -61,6 +68,8 @@ const BlogPost = () => {
 
     if (error || !blogPost) {
         return (
+
+
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">
@@ -159,16 +168,13 @@ const BlogPost = () => {
                         )}
 
                         {/* Vote Buttons */}
-                        <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-700">Was this helpful?</span>
-                                <VoteButtons 
-                                    blogId={blogPost._id}
-                                    initialUpvotes={blogPost.upvotes || 0}
-                                    initialDownvotes={blogPost.downvotes || 0}
-                                    initialUserVote={blogPost.userVote || null}
-                                />
-                            </div>
+                        <div className="mb-8">
+                            <VoteButtons 
+                                blogId={blogPost._id}
+                                initialUpvotes={blogPost.upvotes || 0}
+                                initialDownvotes={blogPost.downvotes || 0}
+                                initialUserVote={blogPost.userVote || null}
+                            />
                         </div>
 
                         {/* Content */}
@@ -178,6 +184,19 @@ const BlogPost = () => {
                                 dangerouslySetInnerHTML={{ __html: blogPost.content }}
                             />
                         </div>
+
+                        {/* Vote Buttons */}
+                        <div className="mb-8">
+                            <VoteButtons 
+                                blogId={blogPost._id}
+                                initialUpvotes={blogPost.upvotes || 0}
+                                initialDownvotes={blogPost.downvotes || 0}
+                                initialUserVote={blogPost.userVote || null}
+                            />
+                        </div>
+
+
+
 
                         {/* Tags */}
                         {blogPost.tags && blogPost.tags.length > 0 && (

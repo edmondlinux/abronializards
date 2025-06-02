@@ -1,22 +1,34 @@
-
+'use client';
 import React, { useState, useEffect } from 'react';
-import { useUser, SignInButton } from '@clerk/nextjs';
+import { useUser, useClerk } from '@clerk/nextjs';
+import { ThumbsUp, ThumbsDown, X } from 'lucide-react';
 
 const VoteButtons = ({ blogId, initialUpvotes = 0, initialDownvotes = 0, initialUserVote = null }) => {
-    const { isSignedIn, user } = useUser();
+    const { user, isSignedIn } = useUser();
+    const { openSignIn } = useClerk();
     const [upvotes, setUpvotes] = useState(initialUpvotes);
     const [downvotes, setDownvotes] = useState(initialDownvotes);
     const [userVote, setUserVote] = useState(initialUserVote);
-    const [loading, setLoading] = useState(false);
-    const [showSignInPrompt, setShowSignInPrompt] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    // Update state when props change (e.g., on page reload)
+    useEffect(() => {
+        setUpvotes(initialUpvotes);
+        setDownvotes(initialDownvotes);
+        setUserVote(initialUserVote);
+    }, [initialUpvotes, initialDownvotes, initialUserVote]);
 
     const handleVote = async (voteType) => {
         if (!isSignedIn) {
-            setShowSignInPrompt(true);
+            setShowLoginModal(true);
             return;
         }
 
-        setLoading(true);
+        if (isLoading) return;
+
+        setIsLoading(true);
+
         try {
             const response = await fetch('/api/blog/vote', {
                 method: 'POST',
@@ -25,7 +37,7 @@ const VoteButtons = ({ blogId, initialUpvotes = 0, initialDownvotes = 0, initial
                 },
                 body: JSON.stringify({
                     blogId,
-                    voteType,
+                    voteType
                 }),
             });
 
@@ -41,76 +53,112 @@ const VoteButtons = ({ blogId, initialUpvotes = 0, initialDownvotes = 0, initial
         } catch (error) {
             console.error('Error voting:', error);
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
+    const handleCloseModal = () => {
+        setShowLoginModal(false);
+    };
+
+    const handleLogin = () => {
+        openSignIn();
+        setShowLoginModal(false);
+    };
+
     return (
-        <div className="flex items-center space-x-4">
-            {/* Upvote Button */}
-            <button
-                onClick={() => handleVote('upvote')}
-                disabled={loading}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                    userVote === 'upvote'
-                        ? 'bg-emerald-100 text-emerald-700 border-2 border-emerald-300'
-                        : 'bg-gray-100 hover:bg-emerald-50 text-gray-600 hover:text-emerald-600 border-2 border-transparent'
-                } ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
-            >
-                <svg 
-                    className={`w-5 h-5 ${userVote === 'upvote' ? 'fill-current' : 'stroke-current fill-none'}`}
-                    viewBox="0 0 24 24" 
-                    strokeWidth={2}
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 13l3-3 3 3m0 0l3-3" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16" />
-                </svg>
-                <span className="font-medium">{upvotes}</span>
-            </button>
+        <div className="relative">
+            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                <div className="flex items-center space-x-1">
+                    <span className="text-sm text-gray-600 font-medium">Was this helpful?</span>
+                </div>
 
-            {/* Downvote Button */}
-            <button
-                onClick={() => handleVote('downvote')}
-                disabled={loading}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                    userVote === 'downvote'
-                        ? 'bg-red-100 text-red-700 border-2 border-red-300'
-                        : 'bg-gray-100 hover:bg-red-50 text-gray-600 hover:text-red-600 border-2 border-transparent'
-                } ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
-            >
-                <svg 
-                    className={`w-5 h-5 ${userVote === 'downvote' ? 'fill-current' : 'stroke-current fill-none'}`}
-                    viewBox="0 0 24 24" 
-                    strokeWidth={2}
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 11l-3 3-3-3m0 0l-3 3" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 20V4" />
-                </svg>
-                <span className="font-medium">{downvotes}</span>
-            </button>
+                <div className="flex items-center space-x-2">
+                    {/* Upvote Button */}
+                    <button
+                        onClick={() => handleVote('upvote')}
+                        disabled={isLoading}
+                        className={`
+                            flex items-center space-x-1 px-3 py-2 rounded-md transition-all duration-200 
+                            ${userVote === 'upvote' 
+                                ? 'bg-green-100 text-green-700 border border-green-200 shadow-sm' 
+                                : 'bg-white text-gray-600 border border-gray-200 hover:bg-green-50 hover:text-green-600 hover:border-green-200'
+                            }
+                            ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-sm active:scale-95'}
+                        `}
+                        title="Mark as helpful"
+                    >
+                        <ThumbsUp 
+                            size={16} 
+                            className={`${userVote === 'upvote' ? 'fill-current' : ''}`} 
+                        />
+                        <span className="text-sm font-medium">{upvotes}</span>
+                    </button>
 
-            {/* Sign In Prompt Modal */}
-            {showSignInPrompt && !isSignedIn && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                            Sign in to vote
-                        </h3>
-                        <p className="text-gray-600 mb-4">
-                            You need to be signed in to vote on blog posts.
-                        </p>
-                        <div className="flex space-x-3">
-                            <SignInButton mode="modal">
-                                <button className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-                                    Sign In
-                                </button>
-                            </SignInButton>
-                            <button
-                                onClick={() => setShowSignInPrompt(false)}
-                                className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors"
+                    {/* Downvote Button */}
+                    <button
+                        onClick={() => handleVote('downvote')}
+                        disabled={isLoading}
+                        className={`
+                            flex items-center space-x-1 px-3 py-2 rounded-md transition-all duration-200 
+                            ${userVote === 'downvote' 
+                                ? 'bg-red-100 text-red-700 border border-red-200 shadow-sm' 
+                                : 'bg-white text-gray-600 border border-gray-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200'
+                            }
+                            ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-sm active:scale-95'}
+                        `}
+                        title="Mark as not helpful"
+                    >
+                        <ThumbsDown 
+                            size={16} 
+                            className={`${userVote === 'downvote' ? 'fill-current' : ''}`} 
+                        />
+                        <span className="text-sm font-medium">{downvotes}</span>
+                    </button>
+                </div>
+            </div>
+
+            {/* Login Modal */}
+            {showLoginModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+                        {/* Close button */}
+                        <div className="flex justify-end mb-4">
+                            <button 
+                                onClick={handleCloseModal}
+                                className="text-gray-400 hover:text-gray-600 transition-colors"
                             >
-                                Cancel
+                                <X size={24} />
                             </button>
+                        </div>
+
+                        {/* Modal content */}
+                        <div className="text-center">
+                            <div className="mb-4">
+                                <ThumbsUp className="mx-auto text-orange-500 mb-2" size={48} />
+                                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                                    Vote on this post
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    You need to login or create an account to vote and help the community.
+                                </p>
+                            </div>
+
+                            {/* Action buttons */}
+                            <div className="space-y-3">
+                                <button
+                                    onClick={handleLogin}
+                                    className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                                >
+                                    Login / Create Account
+                                </button>
+                                <button
+                                    onClick={handleCloseModal}
+                                    className="w-full bg-gray-100 text-gray-600 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                                >
+                                    Maybe Later
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

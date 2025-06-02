@@ -1,12 +1,12 @@
 
 import connectDB from '@/config/db';
 import Blog from '@/models/Blog';
-import { auth } from '@clerk/nextjs/server';
+import { getAuth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
     try {
-        const { userId } = auth();
+        const { userId } = getAuth(request);
 
         if (!userId) {
             return NextResponse.json({ 
@@ -41,7 +41,7 @@ export async function POST(request) {
 
         if (existingVoteIndex !== -1) {
             const existingVote = blog.voters[existingVoteIndex];
-            
+
             if (existingVote.voteType === voteType) {
                 // User is removing their vote
                 blog.voters.splice(existingVoteIndex, 1);

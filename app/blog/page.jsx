@@ -91,8 +91,8 @@ const BlogList = () => {
 
     if (loading) {
         return (
-      
-           
+
+
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-xl">Loading blog posts...</div>
             </div>
@@ -188,7 +188,7 @@ const BlogList = () => {
                                         />
                                     </div>
                                 )}
-                                
+
                                 <div className="p-6">
                                     <div className="flex items-center mb-3">
                                         <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full mr-2">
@@ -200,15 +200,15 @@ const BlogList = () => {
                                             </span>
                                         )}
                                     </div>
-                                    
+
                                     <h2 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
                                         {post.title}
                                     </h2>
-                                    
+
                                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                                         {post.excerpt}
                                     </p>
-                                    
+
                                     <div className="flex items-center justify-between mb-3">
                                         <time className="text-gray-500 text-sm">
                                             {formatDate(post.publishDate)}
@@ -220,7 +220,7 @@ const BlogList = () => {
                                             Read More →
                                         </Link>
                                     </div>
-                                    
+
                                     {/* Vote Buttons */}
                                     <div className="pt-3 border-t border-gray-100">
                                         <VoteButtons 
@@ -247,7 +247,7 @@ const BlogList = () => {
                             >
                                 Previous
                             </button>
-                            
+
                             {[...Array(pagination.totalPages)].map((_, index) => {
                                 const page = index + 1;
                                 return (
@@ -264,7 +264,7 @@ const BlogList = () => {
                                     </button>
                                 );
                             })}
-                            
+
                             <button
                                 onClick={() => handlePageChange(pagination.currentPage + 1)}
                                 disabled={pagination.currentPage === pagination.totalPages}
@@ -279,7 +279,7 @@ const BlogList = () => {
         </div>
             <Footer />
              </>
-        
+
     );
 };
 

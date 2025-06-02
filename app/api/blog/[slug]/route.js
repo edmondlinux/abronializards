@@ -1,16 +1,17 @@
 import connectDB from '@/config/db';
 import Blog from '@/models/Blog';
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs';
+import { getAuth } from '@clerk/nextjs/server';
 
 export async function GET(request, { params }) {
     try {
         await connectDB();
 
-        const { userId } = auth();
+        const { userId } = getAuth(request);
+        const { slug } = await params;
 
         const blogPost = await Blog.findOne({ 
-            slug: params.slug, 
+            slug: slug, 
             isPublished: true 
         }).select('-author');
 
