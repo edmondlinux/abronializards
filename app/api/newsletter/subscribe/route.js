@@ -4,19 +4,19 @@ import connectDB from "@/config/db";
 import Newsletter from "@/models/Newsletter";
 import nodemailer from "nodemailer";
 
-const createEmailTransporter = () => {
-  return nodemailer.createTransporter({
+const createEmailTransport = () => {
+  return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS
+      pass: process.env.GMAIL_APP_PASSWORD
     }
   });
 };
 
 const sendWelcomeEmail = async (email) => {
   try {
-    const transporter = createEmailTransporter();
+    const transporter = createEmailTransport();
 
     const mailOptions = {
       from: {
