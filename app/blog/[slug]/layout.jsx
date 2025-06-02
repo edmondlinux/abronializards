@@ -37,34 +37,52 @@ export async function generateMetadata({ params }) {
   const title = `${blogPost.title} | Reptile Care Blog`;
   const description = blogPost.excerpt || `Read about ${blogPost.title} - expert reptile care advice and tips.`;
 
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? process.env.NEXT_PUBLIC_SITE_URL || 'https://abronializards.com'
+    : 'http://localhost:3000';
+
   return {
     title,
     description,
     keywords: blogPost.tags ? blogPost.tags.join(', ') : 'reptile care, expert advice',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
       type: 'article',
-      url: `/blog/${resolvedParams.slug}`,
+      url: `${baseUrl}/blog/${resolvedParams.slug}`,
       images: blogPost.featuredImage ? [
         {
           url: blogPost.featuredImage,
-          width: 800,
-          height: 600,
+          width: 1200,
+          height: 630,
           alt: blogPost.title,
         }
       ] : undefined,
       publishedTime: blogPost.publishDate,
       tags: blogPost.tags,
+      locale: 'en_US',
+      siteName: 'Abronia Lizards',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       images: blogPost.featuredImage ? [blogPost.featuredImage] : undefined,
+      creator: '@abronializards',
     },
     alternates: {
-      canonical: `/blog/${resolvedParams.slug}`,
+      canonical: `${baseUrl}/blog/${resolvedParams.slug}`,
     }
   };
 }

@@ -86,8 +86,80 @@ const BlogPost = () => {
         );
     }
 
+    // Generate structured data for the blog post
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": blogPost.title,
+        "description": blogPost.excerpt || blogPost.description,
+        "image": blogPost.featuredImage ? [blogPost.featuredImage] : [],
+        "datePublished": blogPost.publishDate,
+        "dateModified": blogPost.updatedAt || blogPost.publishDate,
+        "author": {
+            "@type": "Organization",
+            "name": "Abronia Lizards",
+            "url": "https://abronializards.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Abronia Lizards",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://abronializards.com/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://abronializards.com/blog/${params.slug}`
+        },
+        "keywords": blogPost.tags ? blogPost.tags.join(', ') : 'reptile care, abronia lizards',
+        "articleSection": blogPost.category,
+        "about": {
+            "@type": "Thing",
+            "name": blogPost.reptileSpecies || "Reptile Care"
+        }
+    };
+
+    // Breadcrumb structured data
+    const breadcrumbData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://abronializards.com"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://abronializards.com/blog"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": blogPost.title,
+                "item": `https://abronializards.com/blog/${params.slug}`
+            }
+        ]
+    };
+
     return (
         <> 
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: JSON.stringify(structuredData)
+            }}
+        />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: JSON.stringify(breadcrumbData)
+            }}
+        />
         <Navbar/> 
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
@@ -141,6 +213,13 @@ const BlogPost = () => {
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                             {blogPost.title}
                         </h1>
+
+                        {/* Add SEO-friendly subtitle if excerpt exists */}
+                        {blogPost.excerpt && (
+                            <h2 className="text-xl text-gray-600 font-medium mb-6 sr-only">
+                                {blogPost.excerpt.substring(0, 120)}...
+                            </h2>
+                        )}
 
                         {/* Meta */}
                         <div className="flex items-center text-gray-500 text-sm mb-8 pb-8 border-b border-gray-200">
