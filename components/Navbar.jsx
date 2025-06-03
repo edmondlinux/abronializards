@@ -56,6 +56,13 @@ const Navbar = () => {
           <span className="relative z-10">Contact</span>
           <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-10 rounded-lg transition-opacity duration-300"></span>
         </Link>
+        <Link 
+          href="/feed" 
+          className="relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-emerald-600 transition-all duration-300 rounded-lg hover:bg-emerald-50 group"
+        >
+          <span className="relative z-10">Community</span>
+          <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-10 rounded-lg transition-opacity duration-300"></span>
+        </Link>
         {isSeller && 
           <button 
             onClick={() => router.push('/seller')} 
