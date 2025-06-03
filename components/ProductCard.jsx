@@ -1,21 +1,18 @@
 import React from 'react'
 import { assets } from '@/assets/assets'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useAppContext } from '@/context/AppContext'
+import toast from 'react-hot-toast'; 
+import Image from 'next/image';
+import { useAppContext } from '@/context/AppContext';
 
 const ProductCard = ({ product }) => {
-    const { currency } = useAppContext()
-    const router = useRouter()
-
-    const handleProductClick = () => {
-        router.push(`/product/${product._id}`)
-        scrollTo(0, 0)
-    }
+    const { currency, router } = useAppContext();
 
     return (
         <div
-            onClick={handleProductClick}
+            onClick={() => {
+                toast.loading('Navigating to product page, please wait...');
+                router.push('/product/' + product.slug);
+            }}
             className="flex flex-col items-start gap-0.5 max-w-[200px] w-full cursor-pointer"
         >
             <div className="cursor-pointer group relative bg-gray-500/10 rounded-lg w-full h-52 flex items-center justify-center">
@@ -31,8 +28,6 @@ const ProductCard = ({ product }) => {
                         className="h-3 w-3"
                         src={assets.heart_icon}
                         alt="heart_icon"
-                        width={12}
-                        height={12}
                     />
                 </button>
             </div>
@@ -52,8 +47,6 @@ const ProductCard = ({ product }) => {
                                     : assets.star_dull_icon
                             }
                             alt="star_icon"
-                            width={12}
-                            height={12}
                         />
                     ))}
                 </div>
@@ -61,7 +54,7 @@ const ProductCard = ({ product }) => {
 
             <div className="flex items-end justify-between w-full mt-1">
                 <p className="text-base font-medium">{currency}{product.offerPrice}</p>
-                <button className="max-sm:hidden px-4 py-1.5 text-gray-500 border border-gray-500/20 rounded-full text-xs hover:bg-slate-50 transition">
+                <button className=" max-sm:hidden px-4 py-1.5 text-gray-500 border border-gray-500/20 rounded-full text-xs hover:bg-slate-50 transition">
                     Buy now
                 </button>
             </div>
