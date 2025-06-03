@@ -3,6 +3,7 @@ import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
 import { ClerkProvider } from "@clerk/nextjs";
 import GiveawayModal from "@/components/GiveawayModal";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,26 @@ export default function RootLayout({ children }) {
           <AppContextProvider>
             {children}
             <GiveawayModal />
+            <Toaster 
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: '#363636',
+                  color: '#fff',
+                },
+                success: {
+                  style: {
+                    background: '#10b981',
+                  },
+                },
+                error: {
+                  style: {
+                    background: '#ef4444',
+                  },
+                },
+              }}
+            />
           </AppContextProvider>
         </body>
       </html>

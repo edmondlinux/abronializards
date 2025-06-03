@@ -152,6 +152,18 @@ const Navbar = () => {
               <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-5 rounded-full transition-opacity duration-300"></span>
             </button>
           }
+          <button 
+            onClick={() => {
+              router.push('/cart');
+              closeMobileMenu();
+            }}
+            className="flex items-center gap-3 px-4 py-3 w-full text-left text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all duration-200 group"
+          >
+            <CartIcon className="w-5 h-5" />
+            
+          </button>
+
+          
 
           {/* Hamburger Menu Button */}
           <button
