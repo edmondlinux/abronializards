@@ -1,25 +1,30 @@
 import React from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
+import Link from "next/link";
 
 const products = [
   {
     id: 1,
     image: assets.buy_abronia_taeniata_image,
     title: "Buy Abronia Teaniata",
-    description: "Buy Abronia teaniata – Rare, colorful, and tree-dwelling lizard.",
+    description:
+      "Buy Abronia teaniata – Rare, colorful, and tree-dwelling lizard.",
+    slug: "buy-abronia-teaniata",
   },
   {
     id: 2,
     image: assets.buy_abronia_graminea_image,
     title: "Buy Abronia Graminea",
     description: "We have captive bred abronia graminea for sale, check it out",
+    slug: "buy-abronia-graminea",
   },
   {
     id: 3,
     image: assets.buy_abronia_mixteca_image,
     title: "The stunning Mixteca",
     description: "Shop the lovely specie of abronia mixteca, and more.",
+    slug: "buy-abronia-mixteca",
   },
 ];
 
@@ -32,7 +37,7 @@ const FeaturedProduct = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-14 mt-12 md:px-14 px-4">
-        {products.map(({ id, image, title, description }) => (
+        {products.map(({ id, image, title, description, slug }) => (
           <div key={id} className="relative group">
             <Image
               src={image}
@@ -44,9 +49,16 @@ const FeaturedProduct = () => {
               <p className="text-sm lg:text-base leading-5 max-w-60">
                 {description}
               </p>
-              <button className="flex items-center gap-1.5 bg-orange-600 px-4 py-2 rounded">
-                Buy now <Image className="h-3 w-3" src={assets.redirect_icon} alt="Redirect Icon" />
-              </button>
+              <Link href={`/product/${slug}`}>
+                <button className="flex items-center gap-1.5 bg-orange-600 px-4 py-2 rounded">
+                  Buy now{" "}
+                  <Image
+                    className="h-3 w-3"
+                    src={assets.redirect_icon}
+                    alt="Redirect Icon"
+                  />
+                </button>
+              </Link>
             </div>
           </div>
         ))}
