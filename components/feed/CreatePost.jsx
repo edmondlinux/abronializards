@@ -162,7 +162,7 @@ const CreatePost = ({ onPostCreated }) => {
                                         disabled={isLoading}
                                     >
                                         <Camera size={20} className="text-green-500" />
-                                        <span className="text-sm font-medium">Photo</span>
+                                        
                                     </button>
                                     <button
                                         type="button"
