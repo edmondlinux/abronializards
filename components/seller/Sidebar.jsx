@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { assets } from '../../assets/assets';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { LayoutDashboard, Package, FileText, Plus, List, Settings, MessageSquare } from 'lucide-react';
 
 const SideBar = () => {
     const pathname = usePathname()
@@ -39,6 +40,21 @@ const SideBar = () => {
                     </Link>
                 );
             })}
+             <Link href="/seller/testimonials" passHref>
+                        <div
+                            className={
+                                `flex items-center py-3 px-4 gap-3 ${pathname === '/seller/testimonials'
+                                    ? "border-r-4 md:border-r-[6px] bg-orange-600/10 border-orange-500/90"
+                                    : "hover:bg-gray-100/90 border-white"
+                                }`
+                            }
+                        >
+                            <MessageSquare
+                                 className="w-7 h-7"
+                            />
+                            <p className='md:block hidden text-center'>Testimonials</p>
+                        </div>
+                    </Link>
         </div>
     );
 };
