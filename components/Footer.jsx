@@ -90,7 +90,7 @@ const Footer = () => {
                   { name: "Care Guides", href: "blog/abronia-care-sheet" },
                   { name: "Shop", href: "/shop" },
                   { name: "Shipping & Returns", href: "blog/shipping-and-returns" },
-                  { name: "Contact Us", href: "#" },
+                  { name: "Contact Us", href: "/contact" },
                 ].map((link) => (
                   <li key={link.name}>
                     <a
