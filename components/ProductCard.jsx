@@ -6,9 +6,30 @@ import { useAppContext } from '@/context/AppContext';
 const ProductCard = ({ product }) => {
     const { currency, router } = useAppContext()
 
+    const handleCardClick = (e) => {
+        // Prevent navigation if clicking on interactive elements
+        if (e.target.closest('button')) {
+            return;
+        }
+        router.push('/product/' + (product.slug || product._id));
+        window.scrollTo(0, 0);
+    }
+
+    const handleHeartClick = (e) => {
+        e.stopPropagation();
+        // Add your heart/wishlist logic here
+        console.log('Added to wishlist:', product.name);
+    }
+
+    const handleBuyNowClick = (e) => {
+        e.stopPropagation();
+        // Add your buy now logic here
+        console.log('Buy now clicked:', product.name);
+    }
+
     return (
         <div
-            onClick={() => { router.push('/product/' + (product.slug || product._id)); scrollTo(0, 0) }}
+            onClick={handleCardClick}
             className="flex flex-col items-start gap-1 max-w-[200px] w-full cursor-pointer group/card hover:shadow-lg transition-all duration-300 p-2 rounded-xl hover:-translate-y-1"
         >
             <div className="cursor-pointer group relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl w-full h-52 flex items-center justify-center overflow-hidden shadow-sm">
@@ -19,14 +40,18 @@ const ProductCard = ({ product }) => {
                     width={800}
                     height={800}
                 />
-                <button className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200 opacity-0 group-hover:opacity-100">
+                <button 
+                    onClick={handleHeartClick}
+                    className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                    aria-label="Add to wishlist"
+                >
                     <Image
                         className="h-3.5 w-3.5"
                         src={assets.heart_icon}
                         alt="heart_icon"
                     />
                 </button>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-xl"></div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-xl pointer-events-none"></div>
             </div>
 
             <div className="w-full space-y-1 pt-1">
@@ -53,7 +78,10 @@ const ProductCard = ({ product }) => {
 
                 <div className="flex items-end justify-between w-full mt-2">
                     <p className="text-base font-bold text-gray-900">{currency}{product.offerPrice}</p>
-                    <button className="max-sm:hidden px-4 py-1.5 text-gray-700 bg-gray-50 border border-gray-200 rounded-full text-xs hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200 font-medium shadow-sm">
+                    <button 
+                        onClick={handleBuyNowClick}
+                        className="max-sm:hidden px-4 py-1.5 text-gray-700 bg-gray-50 border border-gray-200 rounded-full text-xs hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200 font-medium shadow-sm"
+                    >
                         Buy now
                     </button>
                 </div>
