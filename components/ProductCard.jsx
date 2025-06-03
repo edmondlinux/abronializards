@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets } from '@/assets/assets'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useAppContext } from '@/context/AppContext'
 
 const ProductCard = ({ product }) => {
