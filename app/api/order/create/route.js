@@ -88,7 +88,7 @@ const generateOrderEmailHTML = (order, userDetails) => {
 
         <p>If you have any questions about your order, please don't hesitate to contact us.</p>
 
-        <p>Thank you for choosing QuickCart!</p>
+        <p>Thank you for choosing Abronia Lizards!</p>
 
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
           <p style="color: #6c757d; font-size: 14px;">
