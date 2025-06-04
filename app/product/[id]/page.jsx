@@ -58,7 +58,8 @@ async function getProducts() {
 }
 
 const Product = async ({ params }) => {
-    const { id } = params;
+    const resolvedParams = await params;
+    const { id } = resolvedParams;
     const productData = await getProduct(id);
     const products = await getProducts();
 

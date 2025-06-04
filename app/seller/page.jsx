@@ -32,14 +32,20 @@ const AddProduct = () => {
       formData.append('images',files[i])
     }
 
+    // Show loading toast
+    const loadingToast = toast.loading('Adding product... Please wait');
+
     try {
 
       const token = await getToken()
 
       const { data } = await axios.post('/api/product/add',formData,{headers:{Authorization:`Bearer ${token}`}})
 
+      // Dismiss loading toast
+      toast.dismiss(loadingToast);
+
       if (data.success) {
-        toast.success(data.message)
+        toast.success('Product added successfully!')
         setFiles([]);
         setName('');
         setDescription('');
@@ -52,6 +58,8 @@ const AddProduct = () => {
 
 
     } catch (error) {
+      // Dismiss loading toast
+      toast.dismiss(loadingToast);
       toast.error(error.message)
     }
 
