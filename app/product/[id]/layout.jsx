@@ -1,9 +1,12 @@
+
 import { notFound } from 'next/navigation';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 
 async function getProduct(slug) {
   try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+
     const response = await fetch(`${baseUrl}/api/product/${slug}`, {
       cache: 'force-cache'
     });
@@ -36,15 +39,10 @@ export async function generateMetadata({ params }) {
   const price = `$${product.offerPrice}`;
   const category = product.category;
 
-  const imageUrl = product.image && product.image.length > 0
-    ? (product.image[0].startsWith('http')
-        ? product.image[0]
-        : `${baseUrl}${product.image[0]}`
-      )
-    : undefined;
-
   return {
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(process.env.NODE_ENV === 'production' 
+      ? process.env.NEXT_PUBLIC_SITE_URL || 'https://abronializards.com'
+      : 'http://localhost:3000'),
     title,
     description,
     keywords: `${product.name}, ${category}, abronia lizards, reptile care, captive bred`,
@@ -53,9 +51,13 @@ export async function generateMetadata({ params }) {
       description: `${description} Price: ${price}`,
       type: 'website',
       url: `/product/${resolvedParams.id}`,
-      images: imageUrl ? [
+      images: product.image && product.image.length > 0 ? [
         {
-          url: imageUrl,
+          url: product.image[0].startsWith('http') 
+            ? product.image[0] 
+            : `${process.env.NODE_ENV === 'production' 
+                ? process.env.NEXT_PUBLIC_SITE_URL || 'https://abronializards.com'
+                : 'https://ec59118c-b0dd-400e-a54a-91862eb953e6-00-1tpzcvwzak64a.kirk.replit.dev'}${product.image[0]}`,
           width: 800,
           height: 600,
           alt: product.name,
@@ -67,7 +69,13 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title,
       description: `${description} Price: ${price}`,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: product.image && product.image.length > 0 ? [
+        product.image[0].startsWith('http') 
+          ? product.image[0] 
+          : `${process.env.NODE_ENV === 'production' 
+              ? process.env.NEXT_PUBLIC_SITE_URL || 'https://abronializards.com'
+              : 'http://localhost:3000'}${product.image[0]}`
+      ] : undefined,
     },
     alternates: {
       canonical: `/product/${resolvedParams.id}`,
