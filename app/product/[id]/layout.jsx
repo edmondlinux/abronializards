@@ -10,7 +10,7 @@ async function getProduct(slug) {
       : 'http://localhost:3000';
 
     const response = await fetch(`${baseUrl}/api/product/${slug}`, {
-      cache: 'no-store'
+      cache: 'force-cache'
     });
 
     if (!response.ok) {
