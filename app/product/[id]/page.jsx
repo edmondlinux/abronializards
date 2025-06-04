@@ -8,12 +8,11 @@ import React from "react";
 import ProductReviews from "@/components/ProductReviews";
 import ProductClient from "./ProductClient";
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 // Generate static params for better performance
 export async function generateStaticParams() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
-                       (process.env.NODE_ENV === 'production' ? 'https://abronializards.vercel.app' : 'http://0.0.0.0:3000');
-
         const response = await fetch(`${baseUrl}/api/product/list`);
         const data = await response.json();
 
@@ -32,9 +31,6 @@ export async function generateStaticParams() {
 // Server-side data fetching
 async function getProduct(id) {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
-                       (process.env.NODE_ENV === 'production' ? 'https://abronializards.com' : 'http://0.0.0.0:3000');
-
         const response = await fetch(`${baseUrl}/api/product/${id}`, {
             cache: 'force-cache' // Enable caching for better performance
         });
@@ -50,9 +46,6 @@ async function getProduct(id) {
 
 async function getProducts() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
-                       (process.env.NODE_ENV === 'production' ? 'https://abronializards.com' : 'http://0.0.0.0:3000');
-
         const response = await fetch(`${baseUrl}/api/product/list`, {
             cache: 'force-cache'
         });
