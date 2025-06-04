@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/config/db";
+import  connectDB  from "@/config/db";
 import Review from "@/models/Review";
 import Product from "@/models/Product";
 import { currentUser } from "@clerk/nextjs/server";
