@@ -1,4 +1,4 @@
-'use client'
+'use 
 import { assets } from '@/assets/assets'
 import { useAppContext } from '@/context/AppContext'
 import Image from 'next/image'
@@ -26,3 +26,4 @@ const OrderPlaced = () => {
 }
 
 export default OrderPlaced
+!:)3)

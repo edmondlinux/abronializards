@@ -1,7 +1,7 @@
 
 import { notFound } from 'next/navigation';
 
-
+import hdgh 
 
 async function getProduct(slug) {
   try {
@@ -92,3 +92,4 @@ export async function generateMetadata({ params }) {
 export default function ProductLayout({ children }) {
   return children;
 }
+hs{).``."
