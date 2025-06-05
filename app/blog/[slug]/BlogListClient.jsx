@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import VoteButtons from '@/components/VoteButtons';
+import TrustedHTMLRenderer from '@/components/TrustedHTMLRenderer';
 
 const BlogPostClient = () => {
     const params = useParams();
@@ -177,9 +178,9 @@ const BlogPostClient = () => {
 
                         {/* Content */}
                         <div className="prose prose-lg max-w-none">
-                            <div
+                            <TrustedHTMLRenderer 
+                                htmlContent={blogPost.content}
                                 className="text-gray-800 leading-relaxed"
-                                dangerouslySetInnerHTML={{ __html: blogPost.content }}
                             />
                         </div>
 
