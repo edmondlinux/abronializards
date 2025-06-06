@@ -142,6 +142,33 @@ export const AppContextProvider = (props) => {
         return Math.floor(totalAmount * 100) / 100;
     }
 
+    const cleanupOrphanedCartItems = async () => {
+        const validProductIds = products.map(product => product._id);
+        const cartItemIds = Object.keys(cartItems);
+
+        let hasOrphanedItems = false;
+        const cleanedCart = {};
+
+        cartItemIds.forEach(itemId => {
+            if (validProductIds.includes(itemId)) {
+                cleanedCart[itemId] = cartItems[itemId];
+            } else {
+                hasOrphanedItems = true;
+            }
+        });
+
+        if (hasOrphanedItems && user) {
+            setCartItems(cleanedCart);
+            try {
+                const token = await getToken();
+                await axios.post('/api/cart/update', {cartData: cleanedCart}, {headers:{Authorization: `Bearer ${token}`}});
+                toast.success('Removed unavailable items from cart');
+            } catch (error) {
+                console.error('Failed to cleanup cart:', error);
+            }
+        }
+    }
+
     useEffect(() => {
         fetchProductData()
     }, [])
@@ -152,6 +179,13 @@ export const AppContextProvider = (props) => {
         }
     }, [user])
 
+    // Cleanup orphaned cart items when products and cartItems are both loaded
+    useEffect(() => {
+        if (products.length > 0 && Object.keys(cartItems).length > 0 && user) {
+            cleanupOrphanedCartItems();
+        }
+    }, [products, user])
+
     const value = {
         user, getToken,
         currency, router,
@@ -160,7 +194,8 @@ export const AppContextProvider = (props) => {
         products, fetchProductData,
         cartItems, setCartItems,
         addToCart, updateCartQuantity,
-        getCartCount, getCartAmount
+        getCartCount, getCartAmount,
+        cleanupOrphanedCartItems
     }
 
     useEffect(() => {
