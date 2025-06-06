@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { getUserCurrency } from '@/utils/currencyUtils'; // adjust path as needed
 import { useClerk } from "@clerk/nextjs"
 
-    
+
 
 export const AppContext = createContext();
 
@@ -31,7 +31,7 @@ export const AppContextProvider = (props) => {
 
     const fetchProductData = async () => {
         try {
-            
+
             const {data} = await axios.get('/api/product/list')
 
             if (data.success) {
@@ -135,7 +135,7 @@ export const AppContextProvider = (props) => {
         let totalAmount = 0;
         for (const items in cartItems) {
             let itemInfo = products.find((product) => product._id === items);
-            if (cartItems[items] > 0) {
+            if (cartItems[items] > 0 && itemInfo) {
                 totalAmount += itemInfo.offerPrice * cartItems[items];
             }
         }
