@@ -1,4 +1,3 @@
-
 'use client'
 import React, { useEffect, useState } from "react";
 import { assets } from "@/assets/assets";
@@ -7,6 +6,9 @@ import { useAppContext } from "@/context/AppContext";
 import Loading from "@/components/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
+import dynamic from 'next/dynamic';
+
+const CodeEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false });
 
 const BlogManagement = () => {
     const { router, getToken, user } = useAppContext();
@@ -288,13 +290,13 @@ const BlogManagement = () => {
 
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Content (HTML)</label>
-                                    <textarea
+                                    <CodeEditor
                                         value={content}
-                                        onChange={(e) => setContent(e.target.value)}
-                                        rows="8"
-                                        className="w-full outline-none py-2 px-3 rounded border border-gray-300"
+                                        onChange={setContent}
+                                        language="html"
+                                        height="400px"
                                         placeholder="Enter HTML content, e.g., <p>Taking care of abronia has never been easy</p>"
-                                        required
+                                        className="mt-1"
                                     />
                                 </div>
 
@@ -419,13 +421,13 @@ const BlogManagement = () => {
 
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Content (HTML)</label>
-                                    <textarea
+                                    <CodeEditor
                                         value={content}
-                                        onChange={(e) => setContent(e.target.value)}
-                                        rows="8"
-                                        className="w-full outline-none py-2 px-3 rounded border border-gray-300"
+                                        onChange={setContent}
+                                        language="html"
+                                        height="400px"
                                         placeholder="Enter HTML content, e.g., <p>Taking care of abronia has never been easy</p>"
-                                        required
+                                        className="mt-1"
                                     />
                                 </div>
 

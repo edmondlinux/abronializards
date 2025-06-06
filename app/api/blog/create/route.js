@@ -1,4 +1,3 @@
-
 import { v2 as cloudinary } from "cloudinary";
 import { getAuth } from '@clerk/nextjs/server';
 import authSeller from "@/lib/authSeller";

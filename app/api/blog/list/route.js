@@ -1,4 +1,3 @@
-
 import connectDB from '@/config/db';
 import Blog from '@/models/Blog';
 import { auth } from '@clerk/nextjs/server';
@@ -17,7 +16,7 @@ export async function GET(request) {
 
         // Build filter object
         const filter = { isPublished: true };
-        
+
         if (category) filter.category = category;
         if (careLevel) filter.careLevel = careLevel;
         if (species) filter.reptileSpecies = species;
@@ -25,9 +24,9 @@ export async function GET(request) {
         const skip = (page - 1) * limit;
 
         const { userId } = auth();
-        
+
         const blogPosts = await Blog.find(filter)
-            .sort({ publishDate: -1 })
+            .sort({ updatedAt: -1, publishDate: -1 })
             .skip(skip)
             .limit(limit)
             .select('-author'); // Don't expose author info

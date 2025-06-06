@@ -49,8 +49,17 @@ export async function PUT(request, { params }) {
         // Handle featured image if provided
         const featuredImage = formData.get('featuredImage');
         if (featuredImage && featuredImage.size > 0) {
-            // For now, keep existing image - you can implement image upload logic here
-            // updateData.featuredImage = featuredImage;
+            // Convert file to base64 string for storage
+            const bytes = await featuredImage.arrayBuffer();
+            const buffer = Buffer.from(bytes);
+            const base64String = `data:${featuredImage.type};base64,${buffer.toString('base64')}`;
+            updateData.featuredImage = base64String;
+        }
+
+        // Handle featuredImageUrl if provided (for cases where image URL is passed directly)
+        const featuredImageUrl = formData.get('featuredImageUrl');
+        if (featuredImageUrl) {
+            updateData.featuredImage = featuredImageUrl;
         }
 
         const updatedBlogPost = await Blog.findByIdAndUpdate(id, updateData, { new: true });

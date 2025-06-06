@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.1",
+    "@monaco-editor/react": "^4.7.0",
     "axios": "^1.7.9",
     "cloudinary": "^2.5.1",
     "inngest": "^3.31.3",
