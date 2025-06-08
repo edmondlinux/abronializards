@@ -155,6 +155,13 @@ const AddProduct = () => {
               <option value="AbroniaReynae">Abronia Reynae</option>
               <option value="AbroniaSmithii">Abronia Smithii</option>
               <option value="AbroniaVasconcelosi">Abronia Vasconcelosi</option>
+
+              <option value="AbroniaOchroteaf">Enclosures</option>
+              <option value="AbroniaRamirez">Feeders</option>
+              <option value="AbroniaReynae">Shipping Supplies</option>
+              <option value="AbroniaSmithii">Accessories</option>
+              <option value="AbroniaVasconcelosi">Other Reptiles</option>
+              
             </select>
           </div>
           <div className="flex flex-col gap-1 w-32">

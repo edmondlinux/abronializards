@@ -86,10 +86,10 @@ const Footer = () => {
               <ul className="space-y-3">
                 {[
                   { name: "Home", href: "/" },
-                  { name: "Species Info", href:  "blog/abronia-species-info" },
-                  { name: "Care Guides", href: "blog/abronia-care-sheet" },
-                  { name: "Shop", href: "/shop" },
-                  { name: "Shipping & Returns", href: "blog/shipping-and-returns" },
+                  { name: "Species Info", href:  "blog/complete-abronia-species-reference-guide" },
+                  { name: "Care Guides", href: "blog/abronia-graminea-care-guide" },
+                  { name: "Shop", href: "/all-products" },
+                  { name: "Shipping & Returns", href: "blog/shipping-returns-for-abronia-lizards-a-global-guide-for-reptile-keepers" },
                   { name: "Contact Us", href: "/contact" },
                 ].map((link) => (
                   <li key={link.name}>
@@ -179,19 +179,19 @@ const Footer = () => {
             </p>
             <div className="flex space-x-6 mt-4 sm:mt-0">
               <a
-                href="#"
+                href="/blog/Privacy-and-policy"
                 className="hover:text-emerald-400 transition-colors duration-300"
               >
                 Privacy Policy
               </a>
               <a
-                href="#"
+                href="/blog/terms-of-service"
                 className="hover:text-emerald-400 transition-colors duration-300"
               >
                 Terms of Service
               </a>
               <a
-                href="#"
+                href="/blog/cookie-policy"
                 className="hover:text-emerald-400 transition-colors duration-300"
               >
                 Cookies

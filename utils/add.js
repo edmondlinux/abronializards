@@ -500,3 +500,5 @@ addRealisticMultilingualPosts();
 
 
 
+Handling blog post directly from coding is giving me a hard time so I was looking for a way which we could integrate something like a headless cms that will work along site with the traditional method which use to add post, but idk how I can do this, where I can still customize everything like meta data and all other content but still having it delivered at the blog of my website with all existing display is that possible?
+And can you tell me how we can do this ? i have already install sanity,created aproject and sellected some things on the cli i shall provide the complete log , now i just need help with the next steps to follow thansk 
