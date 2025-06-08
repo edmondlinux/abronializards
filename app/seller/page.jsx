@@ -156,11 +156,11 @@ const AddProduct = () => {
               <option value="AbroniaSmithii">Abronia Smithii</option>
               <option value="AbroniaVasconcelosi">Abronia Vasconcelosi</option>
 
-              <option value="AbroniaOchroteaf">Enclosures</option>
-              <option value="AbroniaRamirez">Feeders</option>
-              <option value="AbroniaReynae">Shipping Supplies</option>
-              <option value="AbroniaSmithii">Accessories</option>
-              <option value="AbroniaVasconcelosi">Other Reptiles</option>
+              <option value="Enclosures">Enclosures</option>
+              <option value="Feeders">Feeders</option>
+              <option value="Shipping">Shipping Supplies</option>
+              <option value="Accessories">Accessories</option>
+              <option value="OtherReptiles">Other Reptiles</option>
               
             </select>
           </div>
