@@ -54,65 +54,6 @@ export async function generateMetadata({ params }) {
             robots: 'noindex, nofollow'
         };
     }
-
-        return {
-            title: `${post.author.name} - Community Post`,
-            description,
-            keywords: 'community, social media, feed, post, discussion',
-            robots: {
-                index: true,
-                follow: true,
-                googleBot: {
-                    index: true,
-                    follow: true,
-                    'max-video-preview': -1,
-                    'max-image-preview': 'large',
-                    'max-snippet': -1,
-                },
-            },
-            openGraph: {
-                title: `${post.author.name} - Community Post`,
-                description,
-                type: 'article',
-                url: `${baseUrl}/feed/post/${resolvedParams.postId}`,
-                images: post.image ? [
-                    {
-                        url: post.image,
-                        width: 1200,
-                        height: 630,
-                        alt: 'Post image',
-                    }
-                ] : [
-                    {
-                        url: `${baseUrl}/api/og/post?id=${resolvedParams.postId}`,
-                        width: 1200,
-                        height: 630,
-                        alt: description,
-                    }
-                ],
-                publishedTime: post.createdAt,
-                authors: [post.author.name],
-                locale: 'en_US',
-                siteName: 'Community Feed',
-            },
-            twitter: {
-                card: 'summary_large_image',
-                title: `${post.author.name} - Community Post`,
-                description,
-                images: post.image ? [post.image] : [`${baseUrl}/api/og/post?id=${resolvedParams.postId}`],
-                creator: '@yourhandle',
-            },
-            alternates: {
-                canonical: `${baseUrl}/feed/post/${resolvedParams.postId}`,
-            }
-        };
-    } catch (error) {
-        console.error('Error generating metadata:', error);
-        return {
-            title: 'Community Post',
-            description: 'View this post on our community feed.'
-        };
-    }
 }
 
 async function getPost(postId) {
