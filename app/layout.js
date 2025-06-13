@@ -33,17 +33,7 @@ export const metadata = {
   authors: [{ name: "Abronia Lizards" }],
   creator: "Abronia Lizards",
   publisher: "Abronia Lizards",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      maxSnippet: -1,
-      maxImagePreview: 'large',
-      maxVideoPreview: -1,
-    },
-  },
+  robots: 'index, follow',
   openGraph: {
     type: 'website',
     locale: 'en_US',

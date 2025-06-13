@@ -149,7 +149,8 @@ export async function generateMetadata({ params }) {
       'product:price:currency': 'USD',
       'product:availability': 'in stock',
       'product:category': category,
-    }
+    },
+    robots: 'index, follow',
   };
 }
 

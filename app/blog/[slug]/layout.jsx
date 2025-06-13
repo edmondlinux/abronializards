@@ -44,6 +44,28 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
+    robots: 'index, follow',
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `${baseUrl}/blog/${resolvedParams.slug}`,
+      images: blogPost.featuredImage ? [blogPost.featuredImage] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: blogPost.featuredImage ? [blogPost.featuredImage] : [],
+    },
+    alternates: {
+      canonical: `/blog/${resolvedParams.slug}`,
+    }
+  };
+
+  return {
+    title,
+    description,
     keywords: blogPost.tags ? blogPost.tags.join(', ') : 'reptile care, expert advice',
     robots: {
       index: true,

@@ -43,7 +43,8 @@ export const metadata = {
   },
   alternates: {
     canonical: '/blog',
-  }
+  },
+  robots: 'index, follow'
 };
 
 export default function BlogLayout({ children }) {

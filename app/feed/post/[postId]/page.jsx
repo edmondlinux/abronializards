@@ -23,7 +23,37 @@ export async function generateMetadata({ params }) {
             ? post.content.substring(0, 160) + '...'
             : post.content;
 
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://yoursite.com';
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://abronializards.com';
+
+        return {
+            title: `${post.title || 'Community Post'} | Abronia Lizards`,
+            description,
+            robots: 'index, follow',
+            openGraph: {
+                title: post.title || 'Community Post',
+                description,
+                type: 'article',
+                url: `${baseUrl}/feed/post/${resolvedParams.postId}`,
+                images: post.images || [],
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: post.title || 'Community Post',
+                description,
+                images: post.images || [],
+            },
+            alternates: {
+                canonical: `/feed/post/${resolvedParams.postId}`,
+            }
+        };
+    } catch (error) {
+        console.error('Error generating metadata:', error);
+        return {
+            title: 'Post Not Found',
+            description: 'The requested post could not be found.',
+            robots: 'noindex, nofollow'
+        };
+    }
 
         return {
             title: `${post.author.name} - Community Post`,
