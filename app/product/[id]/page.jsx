@@ -11,9 +11,16 @@ import ProductClient from "./ProductClient";
 // Generate static params for better performance
 export async function generateStaticParams() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL ;
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 
+                       (process.env.NODE_ENV === 'production' ? 'https://abronializards.com' : 'http://0.0.0.0:3000');
 
         const response = await fetch(`${baseUrl}/api/product/list`);
+        
+        if (!response.ok) {
+            console.error(`Failed to fetch products: ${response.status} ${response.statusText}`);
+            return [];
+        }
+        
         const data = await response.json();
 
         if (data.success) {
