@@ -1,0 +1,195 @@
+<script>
+    // Template variables for easy customization
+    const templateData = {
+        SPECIES_SCIENTIFIC_NAME: "Abronia meledona",
+        SPECIES_COMMON_NAME: "— (No widely used common name)",
+        CATEGORY: "Foundational Species Profile",
+        CONSERVATION_STATUS: "Vulnerable",
+        DESCRIBED_BY: "",
+        FAMILY: "Anguidae",
+        NATIVE_RANGE: "Mexico, specific cloud forest regions",
+        INTRO_PARAGRAPH_1: "A rare arboreal alligator lizard native to Mexican cloud forests, Abronia meledona is noted for its distinct scalation and coloration.",
+        INTRO_PARAGRAPH_2: "This species represents the specialized adaptations required for life in high-elevation cloud forest environments, where cool temperatures and high humidity create unique ecological niches.",
+        MAIN_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        MAIN_IMAGE_CAPTION: "Abronia meledona in its natural habitat",
+        PURCHASE_LINK: "/product/abronia-meledona",
+        COLOR_DESCRIPTION: "Greenish with faint markings",
+        BODY_DESCRIPTION: "Keeled scales giving textured appearance",
+        TAIL_DESCRIPTION: "Prehensile tail adapted for climbing",
+        SIZE_DESCRIPTION: "20–24 cm (7.9–9.4 in) total length",
+        HEAD_DESCRIPTION: "Proportionate head with alert expression",
+        GEOGRAPHIC_RANGE: "Mexican cloud forest regions",
+        ELEVATION_RANGE: "2,000–2,600 m (6,600–8,500 ft)",
+        HABITAT_TYPE: "Humid cloud forests with dense vegetation",
+        ENVIRONMENT_DESCRIPTION: "High humidity environment with abundant mosses, bromeliads, and epiphytic plants creating a complex vertical ecosystem",
+        HABITAT_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        HABITAT_IMAGE_CAPTION: "Close-up of head and body scales",
+        ACTIVITY_PATTERNS: "<li><strong>Arboreal and diurnal:</strong> Active during daylight hours in trees</li><li><strong>Climbing specialist:</strong> Uses prehensile tail for navigation</li><li><strong>Shelter preference:</strong> Prefers bromeliads and mossy branches</li>",
+        PREDATOR_AVOIDANCE_DESCRIPTION: "Relies on cryptic coloration and arboreal lifestyle to avoid ground-dwelling predators",
+        BEHAVIORAL_QUOTE: "A. meledona exemplifies the specialized nature of cloud forest fauna, perfectly adapted to its misty, cool environment.",
+        REPRODUCTIVE_CHARACTERISTICS: "<li><strong>Viviparous:</strong> Gives live birth</li><li><strong>Breeding season:</strong> Corresponds with optimal humidity periods</li><li><strong>Parental care:</strong> Minimal post-birth care typical of species</li>",
+        REPRODUCTION_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        REPRODUCTION_IMAGE_CAPTION: "Juvenile A. meledona on moss-covered branch",
+        CITES_STATUS: "Not specifically listed",
+        LEGAL_PROTECTIONS: "Protected under Mexican wildlife regulations",
+        MAJOR_THREATS: "<li><strong>Habitat loss:</strong> Cloud forest destruction</li><li><strong>Climate change:</strong> Altering moisture patterns</li><li><strong>Limited range:</strong> Vulnerable to local extinctions</li>",
+        CONSERVATION_ADDITIONAL_INFO: "Threatened by habitat loss as cloud forests face pressure from agricultural expansion and climate change effects on elevation-specific ecosystems.",
+        LEGAL_NOTICE: "Conservation of cloud forests essential for species survival",
+        CAPTIVE_CARE_PARAMETERS: "<li><strong>Enclosure Size:</strong> 55×45×85 cm (22×18×34 in) vertical</li><li><strong>Temperature:</strong> Day 18–22°C (64–72°F), Night 12–16°C (54–61°F)</li><li><strong>Humidity:</strong> 80–90%</li><li><strong>UVB:</strong> Moderate (T5 HO 6%–10%)</li><li><strong>Photoperiod:</strong> 10–12 hours</li>",
+        TAXONOMIC_HISTORY: "<li>Represents specialized cloud forest adaptation</li><li>Part of the diverse Mexican Abronia radiation</li><li>Morphologically distinct from related species</li>",
+        INTERESTING_FACTS: "<li>Specialized for cloud forest living</li><li>Insectivorous diet focuses on arboreal prey</li><li>Uses bromeliads as both shelter and hunting grounds</li><li>Adapted to cool, humid conditions</li>",
+        CONSERVATION_ACTIONS: "<li><strong>Habitat protection:</strong> Support cloud forest conservation</li><li><strong>Research support:</strong> Contribute to ecological studies</li><li><strong>Awareness:</strong> Educate about cloud forest importance</li>",
+        RELATED_LINKS: '<a href="/compare-abronia-species" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🦎 Compare Abronia Species</a><a href="/cloud-forest-conservation" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🌿 Cloud Forest Conservation</a><a href="/abronia-species-index" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">📚 See Full Species Index</a>',
+        CLOSING_QUOTE: "Abronia meledona serves as an indicator species for the health of Mexican cloud forest ecosystems, highlighting the importance of preserving these unique high-elevation habitats.",
+        CONSERVATION_TIP: "Conservation Tip: Cloud forest ecosystems are among the most threatened habitats globally. Supporting conservation efforts in Mexican cloud forests helps protect A. meledona and countless other endemic species!"
+    };
+
+    // Function to populate template
+    function populateTemplate(data) {
+        for (const [key, value] of Object.entries(data)) {
+            const regex = new RegExp(`{{${key}}}`, 'g');
+            document.body.innerHTML = document.body.innerHTML.replace(regex, value);
+        }
+    }
+
+    // Function to show conservation tip
+    function showConservationTip() {
+        alert(templateData.CONSERVATION_TIP);
+    }
+
+    // Populate template when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        populateTemplate(templateData);
+    });
+</script>
+
+<script>
+    // Template variables for easy customization
+    const templateData = {
+        SPECIES_SCIENTIFIC_NAME: "Abronia mitchelli",
+        SPECIES_COMMON_NAME: "Mitchell's Arboreal Alligator Lizard",
+        CATEGORY: "Foundational Species Profile",
+        CONSERVATION_STATUS: "Endangered",
+        DESCRIBED_BY: "",
+        FAMILY: "Anguidae",
+        NATIVE_RANGE: "Sierra Madre de Oaxaca, Mexico",
+        INTRO_PARAGRAPH_1: "Endemic to Oaxaca, A. mitchelli inhabits montane cloud forests and is prized for its unique scale pattern and climbing ability.",
+        INTRO_PARAGRAPH_2: "This endangered species represents one of the most range-restricted Abronia species, making it particularly vulnerable to habitat loss and environmental changes in its limited Oaxacan range.",
+        MAIN_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        MAIN_IMAGE_CAPTION: "Abronia mitchelli perched on a moss-covered branch",
+        PURCHASE_LINK: "/product/abronia-mitchelli",
+        COLOR_DESCRIPTION: "Olive green to brown with subtle spotting",
+        BODY_DESCRIPTION: "Keeled scales with distinctive pattern",
+        TAIL_DESCRIPTION: "Prehensile tail essential for arboreal navigation",
+        SIZE_DESCRIPTION: "22–26 cm (8.7–10.2 in) total length",
+        HEAD_DESCRIPTION: "Well-proportioned head with keen eyes",
+        GEOGRAPHIC_RANGE: "Sierra Madre de Oaxaca, Mexico - highly restricted range",
+        ELEVATION_RANGE: "2,000–2,700 m (6,600–8,860 ft)",
+        HABITAT_TYPE: "Cloud forests with high humidity and moss cover",
+        ENVIRONMENT_DESCRIPTION: "Montane cloud forests characterized by persistent fog, abundant epiphytes, and cool temperatures creating ideal conditions for specialized fauna",
+        HABITAT_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        HABITAT_IMAGE_CAPTION: "Profile showing scalation",
+        ACTIVITY_PATTERNS: "<li><strong>Diurnal, arboreal:</strong> Active during day in tree canopy</li><li><strong>Specialized diet:</strong> Insects and small arthropods</li><li><strong>Shelter behavior:</strong> Uses bromeliads and tree moss for protection</li>",
+        PREDATOR_AVOIDANCE_DESCRIPTION: "Relies on cryptic coloration and specialized arboreal behavior to avoid predators in the cloud forest canopy",
+        BEHAVIORAL_QUOTE: "Mitchell's Arboreal Alligator Lizard exemplifies the unique adaptations required for survival in Oaxaca's threatened cloud forest ecosystems.",
+        REPRODUCTIVE_CHARACTERISTICS: "<li><strong>Viviparous:</strong> Live-bearing reproduction</li><li><strong>Small clutches:</strong> Adapted to stable environment</li><li><strong>Extended development:</strong> Longer gestation in cool conditions</li>",
+        REPRODUCTION_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        REPRODUCTION_IMAGE_CAPTION: "Young A. mitchelli in natural habitat",
+        CITES_STATUS: "Not specifically listed",
+        LEGAL_PROTECTIONS: "Protected under Mexican conservation laws",
+        MAJOR_THREATS: "<li><strong>Habitat destruction:</strong> Limited range makes population vulnerable</li><li><strong>Climate change:</strong> Altering cloud forest conditions</li><li><strong>Fragmentation:</strong> Isolating populations</li>",
+        CONSERVATION_ADDITIONAL_INFO: "Endangered due to limited range and habitat destruction. Conservation efforts ongoing in Oaxaca focus on protecting remaining cloud forest fragments.",
+        LEGAL_NOTICE: "Critical conservation status requires immediate habitat protection measures",
+        CAPTIVE_CARE_PARAMETERS: "<li><strong>Enclosure Size:</strong> 60×50×90 cm (24×20×36 in) vertical</li><li><strong>Temperature:</strong> Day 17–22°C (63–72°F), Night 12–16°C (54–61°F)</li><li><strong>Humidity:</strong> 80–90%</li><li><strong>UVB:</strong> Moderate (T5 HO 6%–10%)</li><li><strong>Photoperiod:</strong> 10–12 hours</li>",
+        TAXONOMIC_HISTORY: "<li>Named in honor of herpetologist Mitchell</li><li>Endemic to Oaxacan cloud forests</li><li>Represents unique evolutionary lineage</li>",
+        INTERESTING_FACTS: "<li>One of the most range-restricted Abronia species</li><li>Specialized for cloud forest microhabitats</li><li>Important indicator species for ecosystem health</li><li>Requires specific humidity and temperature conditions</li>",
+        CONSERVATION_ACTIONS: "<li><strong>Habitat protection:</strong> Preserve Oaxacan cloud forests</li><li><strong>Research support:</strong> Fund ecological studies</li><li><strong>Community engagement:</strong> Work with local communities</li>",
+        RELATED_LINKS: '<a href="/oaxaca-cloud-forests" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🌲 Oaxaca Cloud Forests</a><a href="/endangered-abronia" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">⚠️ Endangered Abronia Species</a><a href="/abronia-species-index" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">📚 See Full Species Index</a>',
+        CLOSING_QUOTE: "Abronia mitchelli's endangered status serves as a urgent reminder of the need to protect Oaxaca's remaining cloud forest habitats before these unique ecosystems are lost forever.",
+        CONSERVATION_TIP: "Conservation Tip: Oaxaca's cloud forests are biodiversity hotspots under severe threat. Supporting local conservation organizations helps protect A. mitchelli and the incredible diversity of species that call these forests home!"
+    };
+
+    // Function to populate template
+    function populateTemplate(data) {
+        for (const [key, value] of Object.entries(data)) {
+            const regex = new RegExp(`{{${key}}}`, 'g');
+            document.body.innerHTML = document.body.innerHTML.replace(regex, value);
+        }
+    }
+
+    // Function to show conservation tip
+    function showConservationTip() {
+        alert(templateData.CONSERVATION_TIP);
+    }
+
+    // Populate template when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        populateTemplate(templateData);
+    });
+</script>
+
+<script>
+    // Template variables for easy customization
+    const templateData = {
+        SPECIES_SCIENTIFIC_NAME: "Abronia montecristoi",
+        SPECIES_COMMON_NAME: "Monte Cristo Arboreal Alligator Lizard",
+        CATEGORY: "Foundational Species Profile",
+        CONSERVATION_STATUS: "Vulnerable",
+        DESCRIBED_BY: "",
+        FAMILY: "Anguidae",
+        NATIVE_RANGE: "Monte Cristo region, Guatemala",
+        INTRO_PARAGRAPH_1: "Native to Guatemala's Monte Cristo area, this species is arboreal and favors cool, humid cloud forests.",
+        INTRO_PARAGRAPH_2: "This Guatemalan endemic represents the southern extent of cloud forest Abronia distribution, showcasing the remarkable adaptability of this genus across Central American montane ecosystems.",
+        MAIN_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        MAIN_IMAGE_CAPTION: "Abronia montecristoi in its native montane forest",
+        PURCHASE_LINK: "/product/abronia-montecristoi",
+        COLOR_DESCRIPTION: "Green to brown with faint markings",
+        BODY_DESCRIPTION: "Keeled scales adapted for arboreal life",
+        TAIL_DESCRIPTION: "Prehensile tail for climbing and balance",
+        SIZE_DESCRIPTION: "20–24 cm (7.9–9.4 in) total length",
+        HEAD_DESCRIPTION: "Alert expression with well-developed eyes",
+        GEOGRAPHIC_RANGE: "Monte Cristo region, Guatemala - localized distribution",
+        ELEVATION_RANGE: "2,000–2,600 m (6,600–8,500 ft)",
+        HABITAT_TYPE: "Montane cloud forests, high humidity",
+        ENVIRONMENT_DESCRIPTION: "Cool, moist cloud forests with abundant epiphytic vegetation creating complex three-dimensional habitat structure",
+        HABITAT_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        HABITAT_IMAGE_CAPTION: "Detailed dorsal view",
+        ACTIVITY_PATTERNS: "<li><strong>Diurnal, arboreal:</strong> Active during daylight in forest canopy</li><li><strong>Insectivorous:</strong> Feeds on insects and arthropods</li><li><strong>Microhabitat specialist:</strong> Uses bromeliads and moss for shelter</li>",
+        PREDATOR_AVOIDANCE_DESCRIPTION: "Utilizes cryptic coloration and arboreal lifestyle to minimize predation risk in cloud forest environment",
+        BEHAVIORAL_QUOTE: "A. montecristoi demonstrates the remarkable diversity of Abronia species across Central American cloud forest ecosystems.",
+        REPRODUCTIVE_CHARACTERISTICS: "<li><strong>Viviparous:</strong> Live birth adaptation to cool climate</li><li><strong>Seasonal breeding:</strong> Timed with optimal conditions</li><li><strong>Small litters:</strong> Typical of high-elevation species</li>",
+        REPRODUCTION_IMAGE_URL: "[Image Placeholder – Add img src here]",
+        REPRODUCTION_IMAGE_CAPTION: "Juvenile A. montecristoi exploring bromeliad",
+        CITES_STATUS: "Not specifically listed",
+        LEGAL_PROTECTIONS: "Protected under Guatemalan wildlife regulations",
+        MAJOR_THREATS: "<li><strong>Habitat fragmentation:</strong> Forest clearing and agriculture</li><li><strong>Climate change:</strong> Shifting cloud forest zones</li><li><strong>Limited range:</strong> Vulnerable to local impacts</li>",
+        CONSERVATION_ADDITIONAL_INFO: "Vulnerable due to habitat fragmentation. Conservation needed to protect cloud forests in the Monte Cristo region of Guatemala.",
+        LEGAL_NOTICE: "Cloud forest protection essential for species survival",
+        CAPTIVE_CARE_PARAMETERS: "<li><strong>Enclosure Size:</strong> 55×45×85 cm (22×18×34 in) vertical</li><li><strong>Temperature:</strong> Day 17–22°C (63–72°F), Night 12–16°C (54–61°F)</li><li><strong>Humidity:</strong> 85–95%</li><li><strong>UVB:</strong> Moderate (T5 HO 6%–10%)</li><li><strong>Photoperiod:</strong> 10–12 hours</li>",
+        TAXONOMIC_HISTORY: "<li>Named for Monte Cristo region type locality</li><li>Represents Guatemalan Abronia diversity</li><li>Part of Central American cloud forest fauna</li>",
+        INTERESTING_FACTS: "<li>Guatemalan cloud forest endemic</li><li>Adapted to high humidity conditions</li><li>Important part of montane ecosystem</li><li>Represents southern Abronia distribution</li>",
+        CONSERVATION_ACTIONS: "<li><strong>Habitat preservation:</strong> Protect Monte Cristo cloud forests</li><li><strong>Research initiatives:</strong> Study population dynamics</li><li><strong>International cooperation:</strong> Cross-border conservation efforts</li>",
+        RELATED_LINKS: '<a href="/guatemala-cloud-forests" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🌲 Guatemala Cloud Forests</a><a href="/central-american-abronia" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🦎 Central American Abronia</a><a href="/abronia-species-index" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">📚 See Full Species Index</a>',
+        CLOSING_QUOTE: "Abronia montecristoi highlights the importance of protecting Guatemala's cloud forest ecosystems, which harbor unique biodiversity found nowhere else on Earth.",
+        CONSERVATION_TIP: "Conservation Tip: Guatemala's cloud forests are among the most biodiverse ecosystems in Central America. Supporting conservation efforts helps protect A. montecristoi and hundreds of other endemic species!"
+    };
+
+    // Function to populate template
+    function populateTemplate(data) {
+        for (const [key, value] of Object.entries(data)) {
+            const regex = new RegExp(`{{${key}}}`, 'g');
+            document.body.innerHTML = document.body.innerHTML.replace(regex, value);
+        }
+    }
+
+    // Function to show conservation tip
+    function showConservationTip() {
+        alert(templateData.CONSERVATION_TIP);
+    }
+
+    // Populate template when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        populateTemplate(templateData);
+    });
+</script>
+

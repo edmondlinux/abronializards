@@ -1,0 +1,64 @@
+<script>
+    // Template variables for easy customization
+    const templateData = {
+        SPECIES_SCIENTIFIC_NAME: "Abronia matudai",
+        SPECIES_COMMON_NAME: "Matuda's Arboreal Alligator Lizard",
+        CATEGORY: "Foundational Species Profile",
+        CONSERVATION_STATUS: "Vulnerable (IUCN)",
+        DESCRIBED_BY: "Hartweg & Tihen, 1946",
+        FAMILY: "Anguidae",
+        NATIVE_RANGE: "Chiapas, Mexico, and western Guatemala",
+        INTRO_PARAGRAPH_1: "A. matudai is a moderately-sized and well-studied member of the Abronia genus. It is among the more common species encountered in Guatemala and southern Mexico, where it inhabits humid highland forests.",
+        INTRO_PARAGRAPH_2: "Despite its relative visibility, habitat degradation poses a serious risk to its populations.",
+        MAIN_IMAGE_URL: "[Image Placeholder – Add inmate src here]",
+        MAIN_IMAGE_CAPTION: "A visual concept of A. matudai climbing high in the misty canopy, its scaled body blending into moss and epiphytes.",
+        PURCHASE_LINK: "/product/abronia-matudai",
+        COLOR_DESCRIPTION: "Generally green to olive with faint patterning; some specimens have dark crossbands or lateral striping",
+        BODY_DESCRIPTION: "Keel-scaled dorsal surface",
+        TAIL_DESCRIPTION: "Long limbs and proportionate tail",
+        SIZE_DESCRIPTION: "Total Length: 25–30 cm (10–12 in); Tail Length: 13–15 cm (5–6 in)",
+        HEAD_DESCRIPTION: "Large expressive eyes, often displays a 'smiling' jawline with visible labial scales",
+        GEOGRAPHIC_RANGE: "Sierra Madre de Chiapas (Mexico) and Western Guatemalan Highlands",
+        ELEVATION_RANGE: "1,800–2,600 meters (5,900–8,500 ft)",
+        HABITAT_TYPE: "Cloud forests and montane oak-pine forests",
+        ENVIRONMENT_DESCRIPTION: "Prefers areas with abundant moss and epiphyte growth",
+        HABITAT_IMAGE_URL: "[Image Placeholder – Add inmate src here]",
+        HABITAT_IMAGE_CAPTION: "Illustration depicting a curious A. matudai basking near the edge of a bromeliad on a mist-covered tree limb.",
+        ACTIVITY_PATTERNS: "<li><strong>Diurnal and arboreal</strong></li><li><strong>Often found:</strong> Resting or hunting among bromeliads and dense branches</li><li><strong>Tolerant:</strong> Of some environmental variation, though humidity is essential</li>",
+        PREDATOR_AVOIDANCE_DESCRIPTION: "Moderately hardy species with good adaptability to environmental changes",
+        BEHAVIORAL_QUOTE: "A. matudai has become valued in herpetoculture for its hardiness and adaptability, making it a more accessible species for experienced keepers.",
+        REPRODUCTIVE_CHARACTERISTICS: "<li><strong>Viviparous:</strong> Gives birth to live young</li><li><strong>Litter size:</strong> Typically 4–8 neonates</li><li><strong>Breeding cycle:</strong> Often linked to seasonal cycles (rainy season triggers gestation)</li>",
+        REPRODUCTION_IMAGE_URL: "[Image Placeholder – Add inmate src here]",
+        REPRODUCTION_IMAGE_CAPTION: "A. matudai female with developing young - seasonal breeding patterns observed",
+        CITES_STATUS: "Appendix II",
+        LEGAL_PROTECTIONS: "Some protected reserves overlap its native range",
+        MAJOR_THREATS: "<li><strong>Habitat loss:</strong> Due to agriculture, logging, and urban encroachment</li><li><strong>Pet trade capture:</strong> Local capture is a concern but less severe than for rarer species</li><li><strong>Forest fragmentation:</strong> Disrupting population connectivity</li>",
+        CONSERVATION_ADDITIONAL_INFO: "Listed as Vulnerable by the IUCN. Faces ongoing habitat pressures but has some protection through overlapping reserve systems.",
+        LEGAL_NOTICE: "A. matudai has become a more frequent species in herpetoculture and is valued for its hardiness and adaptability.",
+        CAPTIVE_CARE_PARAMETERS: "<li><strong>Day Temp:</strong> 20–26°C (68–78°F)</li><li><strong>Night Temp:</strong> 12–16°C (54–61°F)</li><li><strong>Humidity:</strong> 75–90% RH</li><li><strong>UVB:</strong> Moderate (T5 HO 6–10%, with shaded retreat)</li><li><strong>Enclosure:</strong> Minimum 60 × 45 × 90 cm with vertical setup</li>",
+        TAXONOMIC_HISTORY: "<li>Described by Hartweg & Tihen in 1946</li><li>Named after Eizi Matuda, Mexican botanist</li><li>Among the more well-documented Abronia species</li>",
+        INTERESTING_FACTS: "<li>More common in Guatemala and southern Mexico than other Abronia species</li><li>Opportunistic feeder in captivity</li><li>Tolerates some environmental variation</li><li>Breeding often triggered by seasonal rainy cycles</li>",
+        CONSERVATION_ACTIONS: "<li><strong>Support Habitat Protection:</strong> In Chiapas and Guatemala highlands</li><li><strong>Ethical Captive Breeding:</strong> From licensed sources only</li><li><strong>Cloud Forest Conservation:</strong> Support reforestation efforts</li>",
+        RELATED_LINKS: '<a href="/habitat-threat-maps-matudai" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🗺️ Habitat Threat Maps for Abronia matudai</a><a href="/community-care-sheets" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">📋 Community Care Sheets and Best Practices</a><a href="/support-chiapas-conservation" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors text-sm no-underline inline-block">🌲 Support Cloud Forest Conservation in Chiapas</a>',
+        CLOSING_QUOTE: "Abronia matudai represents a success story in understanding and maintaining Abronia species, but continued habitat protection remains essential for wild populations.",
+        CONSERVATION_TIP: "Conservation Tip: A. matudai's relative hardiness makes it an excellent ambassador species for cloud forest conservation. Supporting habitat protection in Chiapas and Guatemala benefits this and many other endemic species!"
+    };
+
+    // Function to populate template
+    function populateTemplate(data) {
+        for (const [key, value] of Object.entries(data)) {
+            const regex = new RegExp(`{{${key}}}`, 'g');
+            document.body.innerHTML = document.body.innerHTML.replace(regex, value);
+        }
+    }
+
+    // Function to show conservation tip
+    function showConservationTip() {
+        alert(templateData.CONSERVATION_TIP);
+    }
+
+    // Populate template when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        populateTemplate(templateData);
+    });
+</script>
