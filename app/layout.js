@@ -72,6 +72,9 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <meta name="msvalidate.01" content="387A216E91A3B488BB4B1DDA7750DA18" />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
