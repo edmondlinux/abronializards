@@ -58,7 +58,8 @@ export const metadata = {
     images: ['https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208', 'https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208'],
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: 'gDLvsFShMejWiVwPKYeBg3dwbzURCAtH4S_Yw270sck',
+    msvalidate: '387A216E91A3B488BB4B1DDA7750DA18',
   },
   category: 'pets',
   classification: 'business',
@@ -74,6 +75,7 @@ export default function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+        
           <AppContextProvider>
             {children}
             <GiveawayModal />
