@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import VoteButtons from '@/components/VoteButtons';
 import TrustedHTMLRenderer from '@/components/TrustedHTMLRenderer';
 import SEO from '@/components/SEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const BlogPost = () => {
     const params = useParams();
@@ -18,6 +19,7 @@ const BlogPost = () => {
     const [blogPost, setBlogPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [relatedPosts, setRelatedPosts] = useState([]);
 
     useEffect(() => {
         const fetchBlogPost = async () => {
@@ -43,6 +45,19 @@ const BlogPost = () => {
             fetchBlogPost();
         }
     }, [params.slug]);
+
+    useEffect(() => {
+        if (params.slug && blogPost?.category) {
+            fetch(`/api/blog/list?category=${encodeURIComponent(blogPost.category)}&limit=4`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Exclude the current post
+                        setRelatedPosts(data.blogPosts.filter(post => post.slug !== params.slug).slice(0, 3));
+                    }
+                });
+        }
+    }, [params.slug, blogPost?.category]);
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -180,6 +195,14 @@ const BlogPost = () => {
             />
             <Navbar/> 
             <div className="min-h-screen bg-gray-50">
+                {/* Breadcrumbs */}
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                  <Breadcrumbs items={[
+                    { name: 'Home', href: '/' },
+                    { name: 'Blog', href: '/blog' },
+                    { name: blogPost.title, href: `/blog/${params.slug}` }
+                  ]} />
+                </div>
                 {/* Header */}
                 <div className="bg-white shadow-sm">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -321,6 +344,29 @@ const BlogPost = () => {
                         </Link>
                     </div>
                 </article>
+                {/* Related Blog Posts Section */}
+                {relatedPosts.length > 0 && (
+                  <div className="my-14 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col items-center">
+                      <p className="text-2xl font-medium">Related Blog Posts</p>
+                      <div className="w-20 h-0.5 bg-orange-600 mt-2"></div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                      {relatedPosts.map(post => (
+                        <div key={post._id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                          {post.featuredImage && (
+                            <img src={post.featuredImage} alt={post.title} className="w-full h-40 object-cover" />
+                          )}
+                          <div className="p-4">
+                            <p className="font-medium text-lg mb-2">{post.title}</p>
+                            <p className="text-sm text-gray-600 mb-3">{post.excerpt || post.description?.slice(0, 80) + '...'}</p>
+                            <a href={`/blog/${post.slug}`} className="text-orange-600 hover:underline">Read more →</a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
             </div>
             <Footer />
         </>

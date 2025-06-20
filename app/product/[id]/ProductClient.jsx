@@ -1,17 +1,36 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import ProductReviews from "@/components/ProductReviews";
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const ProductClient = ({ productData, products }) => {
     const { currency, addToCart, router, user } = useAppContext();
     const [mainImage, setMainImage] = useState(productData.image[0]);
+    const [relatedPosts, setRelatedPosts] = useState([]);
+
+    useEffect(() => {
+      // Fetch related blog posts by category
+      if (productData.category) {
+        fetch(`/api/blog/list?category=${encodeURIComponent(productData.category)}&limit=3`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) setRelatedPosts(data.blogPosts);
+          });
+      }
+    }, [productData.category]);
 
     return (
         <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10">
+            {/* Breadcrumbs */}
+            <Breadcrumbs items={[
+              { name: 'Home', href: '/' },
+              { name: 'Products', href: '/all-products' },
+              { name: productData.name, href: `/product/${productData.slug || productData._id}` }
+            ]} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div className="px-5 lg:px-16 xl:px-20">
                     <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
@@ -163,6 +182,30 @@ const ProductClient = ({ productData, products }) => {
                     See more
                 </button>
             </div>
+
+            {/* Related Blog Posts Section */}
+            {relatedPosts.length > 0 && (
+              <div className="my-14">
+                <div className="flex flex-col items-center">
+                  <p className="text-2xl font-medium">Related Blog Posts</p>
+                  <div className="w-20 h-0.5 bg-orange-600 mt-2"></div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                  {relatedPosts.map(post => (
+                    <div key={post._id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                      {post.featuredImage && (
+                        <img src={post.featuredImage} alt={post.title} className="w-full h-40 object-cover" />
+                      )}
+                      <div className="p-4">
+                        <p className="font-medium text-lg mb-2">{post.title}</p>
+                        <p className="text-sm text-gray-600 mb-3">{post.excerpt || post.description?.slice(0, 80) + '...'}</p>
+                        <a href={`/blog/${post.slug}`} className="text-orange-600 hover:underline">Read more →</a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
         </div>
     );
 };

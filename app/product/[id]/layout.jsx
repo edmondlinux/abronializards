@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import React from 'react';
 
 async function getProduct(slug) {
   try {
@@ -154,6 +155,91 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ProductLayout({ children }) {
-  return children;
+export const productFaqs = [
+  {
+    question: 'Are Abronia lizards captive bred?',
+    answer: 'Yes, all our Abronia lizards are captive bred in ethical, controlled environments.'
+  },
+  {
+    question: 'What is the shipping process for live reptiles?',
+    answer: 'We use overnight, temperature-controlled shipping to ensure the safety and health of your lizard.'
+  },
+  {
+    question: 'Do you provide care instructions?',
+    answer: 'Yes, every purchase includes a detailed care guide and ongoing support from our experts.'
+  }
+];
+
+export default async function ProductLayout({ children, params }) {
+  const product = await getProduct(params.id);
+
+  let structuredData = null;
+  if (product) {
+    structuredData = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": product.name,
+      "image": product.image && product.image.length > 0 ? product.image.map(img => img.startsWith('http') ? img : `${process.env.NEXT_PUBLIC_SITE_URL}${img}`) : [],
+      "description": product.description,
+      "sku": product._id,
+      "brand": {
+        "@type": "Brand",
+        "name": "Abronia Lizards"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": `${process.env.NEXT_PUBLIC_SITE_URL}/product/${product.slug || product._id}`,
+        "priceCurrency": "USD",
+        "price": product.offerPrice,
+        "availability": "https://schema.org/InStock"
+      },
+      "category": product.category
+    };
+  }
+
+  // FAQPage structured data
+  const faqStructuredData = productFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": productFaqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
+  return (
+    <>
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
+      {faqStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
+      {children}
+      {/* FAQ Section */}
+      {productFaqs.length > 0 && (
+        <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
+          <dl className="space-y-4">
+            {productFaqs.map((faq, idx) => (
+              <div key={idx}>
+                <dt className="font-semibold text-gray-800">{faq.question}</dt>
+                <dd className="text-gray-600 ml-2">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+    </>
+  );
 }

@@ -28,6 +28,21 @@ const Home = () => {
     ]
   };
 
+  const homeFaqs = [
+    {
+      question: 'What species of Abronia lizards do you offer?',
+      answer: 'We offer a variety of captive-bred Abronia species, including Graminea, Taeniata, and Mixteca.'
+    },
+    {
+      question: 'Is shipping safe for live reptiles?',
+      answer: 'Yes, we use overnight, temperature-controlled shipping to ensure your lizard arrives healthy and safe.'
+    },
+    {
+      question: 'Do you provide care support after purchase?',
+      answer: 'Absolutely! Our team is available for ongoing care advice and support for all customers.'
+    }
+  ];
+
   return (
     <>
       <SEO
@@ -47,6 +62,24 @@ const Home = () => {
         }}
         jsonLd={organizationJsonLd}
       />
+      {/* FAQPage JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": homeFaqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })
+        }}
+      />
       <Navbar/>
       <div className="px-6 md:px-16 lg:px-32">
         <HeaderSlider />
@@ -55,6 +88,18 @@ const Home = () => {
         <HomeTestimonials />
         <Banner />
         <NewsLetter />
+        {/* FAQ Section */}
+        <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
+          <dl className="space-y-4">
+            {homeFaqs.map((faq, idx) => (
+              <div key={idx}>
+                <dt className="font-semibold text-gray-800">{faq.question}</dt>
+                <dd className="text-gray-600 ml-2">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
       <Footer />
     </>

@@ -1,5 +1,5 @@
-
 import { notFound } from 'next/navigation';
+import React from 'react';
 
 async function getBlogPost(slug) {
   try {
@@ -109,6 +109,103 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function BlogPostLayout({ children }) {
-  return children;
+export const blogFaqs = [
+  {
+    question: 'What is the best way to care for Abronia lizards?',
+    answer: 'Provide a humid, well-ventilated enclosure with plenty of climbing branches and a varied diet.'
+  },
+  {
+    question: 'Are Abronia lizards good for beginners?',
+    answer: 'They are best suited for keepers with some reptile experience due to their specific care needs.'
+  },
+  {
+    question: 'Where can I find more reptile care tips?',
+    answer: 'Explore our blog for expert guides, care tips, and the latest news on Abronia lizards.'
+  }
+];
+
+export default async function BlogPostLayout({ children, params }) {
+  const blogPost = await getBlogPost(params.slug);
+
+  let structuredData = null;
+  if (blogPost) {
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": blogPost.title,
+      "description": blogPost.excerpt || blogPost.description,
+      "image": blogPost.featuredImage ? [blogPost.featuredImage] : [],
+      "datePublished": blogPost.publishDate,
+      "dateModified": blogPost.updatedAt || blogPost.publishDate,
+      "author": {
+        "@type": "Organization",
+        "name": "Abronia Lizards",
+        "url": "https://abronializards.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Abronia Lizards",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://abronializards.com/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://abronializards.com/blog/${params.slug}`
+      },
+      "keywords": blogPost.tags ? blogPost.tags.join(', ') : 'reptile care, abronia lizards',
+      "articleSection": blogPost.category,
+      "about": {
+        "@type": "Thing",
+        "name": blogPost.reptileSpecies || "Reptile Care"
+      }
+    };
+  }
+
+  // FAQPage structured data
+  const faqStructuredData = blogFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": blogFaqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
+  return (
+    <>
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
+      {faqStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
+      {children}
+      {/* FAQ Section */}
+      {blogFaqs.length > 0 && (
+        <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
+          <dl className="space-y-4">
+            {blogFaqs.map((faq, idx) => (
+              <div key={idx}>
+                <dt className="font-semibold text-gray-800">{faq.question}</dt>
+                <dd className="text-gray-600 ml-2">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+    </>
+  );
 }
