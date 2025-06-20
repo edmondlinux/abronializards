@@ -29,7 +29,7 @@ const nextConfig = {
           },
           {
             key: 'Link',
-            value: ' < https://portfolio-codegiyu.vercel.app >; rel="canonical"',
+            value: ' < https://www.abronializards.com/ >; rel="canonical"',
           },
         ],
         source: '/:path*',
