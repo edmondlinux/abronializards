@@ -1,4 +1,3 @@
-
 export default function robots() {
   const baseUrl = process.env.NODE_ENV === 'production' 
     ? process.env.NEXT_PUBLIC_SITE_URL || 'https://abronializards.com'
@@ -17,6 +16,6 @@ export default function robots() {
         '/add-address',
       ],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `/sitemap.xml`,
   };
 }
