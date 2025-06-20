@@ -98,7 +98,7 @@ const BlogPost = () => {
                         </h1>
                         <Link
                             href="/blog"
-                            className="text-orange-600 hover:text-orange-700 font-medium"
+                            className="text-orange-600 hover:text-orange-700 cursor-pointer font-medium"
                         >
                             ← Back to Blog
                         </Link>
