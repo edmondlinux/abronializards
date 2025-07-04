@@ -65,7 +65,7 @@ export const metadata = {
     images: ['https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208', 'https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208'],
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: process.env.NEXT_GOOGLE_VERIFICATION_CODE,
   },
   category: 'pets',
   classification: 'business',
@@ -77,7 +77,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" content="noindex">
+      <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
