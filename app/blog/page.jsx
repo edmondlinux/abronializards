@@ -4,7 +4,7 @@ import BlogListClient from '@/app/blog/BlogListClient';
 
 async function fetchBlogPosts(page = 1) {
   const params = new URLSearchParams({ page: page.toString(), limit: '9' });
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/api/blog/list?${params}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? ''}/api/blog/list?${params}`, {
     cache: 'no-store', // ensures fresh data
   });
   if (!res.ok) throw new Error('Failed to fetch blog posts');
