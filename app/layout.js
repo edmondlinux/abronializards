@@ -58,7 +58,7 @@ export const metadata = {
     images: ['https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208', 'https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208'],
   },
   verification: {
-    google: 'gDLvsFShMejWiVwPKYeBg3dwbzURCAtH4S_Yw270sck',
+    google: process.env.NEXT_GOOGLE_VERIFICATION_CODE,
   },
   
   category: 'pets',
