@@ -20,6 +20,7 @@ const ContactPage = () => {
         canonical="https://abronializards.com/contact"
         url="https://abronializards.com/contact"
         image="https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208"
+        robots="index, follow"
         openGraph={{
           type: 'website',
           siteName: 'Abronia Lizards',

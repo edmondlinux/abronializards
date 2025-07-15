@@ -44,6 +44,7 @@ export default function FeedPage() {
           canonical="https://abronializards.com/feed"
           url="https://abronializards.com/feed"
           image="https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208"
+          robots="index, follow"
           openGraph={{
             type: 'website',
             siteName: 'Abronia Lizards',

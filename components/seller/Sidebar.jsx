@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { assets } from '../../assets/assets';
-import Image from 'next/image';
+import CloudinaryImage from '../CloudinaryImage';
 import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Package, FileText, Plus, List, Settings, MessageSquare } from 'lucide-react';
 
@@ -30,7 +30,7 @@ const SideBar = () => {
                                 }`
                             }
                         >
-                            <Image
+                            <CloudinaryImage
                                 src={item.icon}
                                 alt={`${item.name.toLowerCase()}_icon`}
                                 className="w-7 h-7"

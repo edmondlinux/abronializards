@@ -4,6 +4,9 @@ import React from 'react';
 async function getProduct(slug) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!baseUrl) {
+      throw new Error('NEXT_PUBLIC_API_URL is not set');
+    }
 
     const response = await fetch(`${baseUrl}/api/product/${slug}`, {
       cache: 'force-cache'

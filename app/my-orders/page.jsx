@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Loading from "@/components/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
+import SEO from '@/components/SEO';
 
 const MyOrders = () => {
 
@@ -42,6 +43,22 @@ const MyOrders = () => {
 
     return (
         <>
+            <SEO
+                title="My Orders | Abronia Lizards"
+                description="View your order history and track your purchases"
+                canonical="https://abronializards.com/my-orders"
+                url="https://abronializards.com/my-orders"
+                robots="noindex, nofollow"
+                openGraph={{
+                    type: 'website',
+                    siteName: 'Abronia Lizards',
+                }}
+                twitter={{
+                    card: 'summary_large_image',
+                    site: '@abronializards',
+                    creator: '@abronializards',
+                }}
+            />
             <Navbar />
             <div className="flex flex-col justify-between px-6 md:px-16 lg:px-32 py-6 min-h-screen">
                 <div className="space-y-5">

@@ -1,12 +1,12 @@
 import React from "react";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "./CloudinaryImage";
 import Link from "next/link";
 
 const Banner = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between md:pl-20 py-14 md:py-0 bg-[#E6E9F2] my-16 rounded-xl overflow-hidden">
-      <Image
+      <CloudinaryImage
         className="max-w-56"
         src={assets.sad_abronia_image}
         alt="jbl_soundbox_image"
@@ -23,7 +23,7 @@ const Banner = () => {
         <Link href="/blog/save-abronia-lizards">
           <button className="group flex items-center justify-center gap-1 px-12 py-2.5 bg-orange-600 rounded text-white">
             Learn about Abroni...
-            <Image
+            <CloudinaryImage
               className="group-hover:translate-x-1 transition"
               src={assets.arrow_icon_white}
               alt="arrow_icon_white"
@@ -32,12 +32,12 @@ const Banner = () => {
         </Link>
       </div>
 
-      <Image
+      <CloudinaryImage
         className="hidden md:block max-w-80"
         src={assets.shipment_partners_image}
         alt="md_controller_image"
       />
-      <Image
+      <CloudinaryImage
         className="md:hidden"
         src={assets.shipment_partners_image}
         alt="sm_controller_image"

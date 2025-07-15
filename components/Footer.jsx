@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "./CloudinaryImage";
 
 const Footer = () => {
   const [footerEmail, setFooterEmail] = useState('');
@@ -48,7 +48,7 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2 lg:col-span-5">
             <div className="mb-6">
-              <Image
+              <CloudinaryImage
                 className="w-32 md:w-36 lg:w-40 hover:scale-105 transition-transform duration-300"
                 src={assets.logo}
                 alt="Abronía Lizards Logo"

@@ -46,7 +46,7 @@ const HomeTestimonials = () => {
     }
 
     return (
-        <section className="py-16 bg-gradient-to-br from-orange-50 to-orange-100">
+        <section className="py-16 mt-16 bg-gradient-to-br from-orange-50 to-orange-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">

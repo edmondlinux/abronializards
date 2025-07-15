@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets } from '@/assets/assets'
 import toast from 'react-hot-toast'; 
-import Image from 'next/image';
+import CloudinaryImage from './CloudinaryImage';
 import { useAppContext } from '@/context/AppContext';
 
 const ProductCard = ({ product }) => {
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
             className="flex flex-col items-start gap-0.5 max-w-[200px] w-full cursor-pointer"
         >
             <div className="cursor-pointer group relative bg-gray-500/10 rounded-lg w-full h-52 flex items-center justify-center">
-                <Image
+                <CloudinaryImage
                     src={product.image[0]}
                     alt={product.name}
                     className="group-hover:scale-105 transition object-cover w-4/5 h-4/5 md:w-full md:h-full"
@@ -24,10 +24,12 @@ const ProductCard = ({ product }) => {
                     height={800}
                 />
                 <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md">
-                    <Image
+                    <CloudinaryImage
                         className="h-3 w-3"
                         src={assets.heart_icon}
                         alt="heart_icon"
+                        width={24}
+                        height={24}
                     />
                 </button>
             </div>
@@ -38,7 +40,7 @@ const ProductCard = ({ product }) => {
                 <p className="text-xs">{4.5}</p>
                 <div className="flex items-center gap-0.5">
                     {Array.from({ length: 5 }).map((_, index) => (
-                        <Image
+                        <CloudinaryImage
                             key={index}
                             className="h-3 w-3"
                             src={
@@ -47,6 +49,8 @@ const ProductCard = ({ product }) => {
                                     : assets.star_dull_icon
                             }
                             alt="star_icon"
+                            width={24}
+                            height={24}
                         />
                     ))}
                 </div>

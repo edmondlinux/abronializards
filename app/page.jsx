@@ -51,6 +51,7 @@ const Home = () => {
         canonical="https://abronializards.com/"
         url="https://abronializards.com/"
         image="https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208"
+        robots="index, follow"
         openGraph={{
           type: 'website',
           siteName: 'Abronia Lizards',

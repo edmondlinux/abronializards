@@ -1,6 +1,6 @@
 import React from "react";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "./CloudinaryImage";
 import Link from "next/link";
 
 const products = [
@@ -10,7 +10,7 @@ const products = [
     title: "Buy Abronia Teaniata",
     description:
       "Buy Abronia teaniata – Rare, colorful, and tree-dwelling lizard.",
-    slug: "buy-abronia-teaniata",
+    slug: "buy-abronia-taeniata",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const FeaturedProduct = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-14 mt-12 md:px-14 px-4">
         {products.map(({ id, image, title, description, slug }) => (
           <div key={id} className="relative group">
-            <Image
+            <CloudinaryImage
               src={image}
               alt={title}
               className="group-hover:brightness-75 transition duration-300 w-full h-auto object-cover"
@@ -52,7 +52,7 @@ const FeaturedProduct = () => {
               <Link href={`/product/${slug}`}>
                 <button className="flex items-center gap-1.5 bg-orange-600 px-4 py-2 rounded">
                   Buy now{" "}
-                  <Image
+                  <CloudinaryImage
                     className="h-3 w-3"
                     src={assets.redirect_icon}
                     alt="Redirect Icon"

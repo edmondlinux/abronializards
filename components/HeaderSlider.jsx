@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "./CloudinaryImage";
 import Link from "next/link";
 
 const HeaderSlider = () => {
@@ -76,14 +76,14 @@ const HeaderSlider = () => {
                   <Link href={`/${slide.slug}`}>
                     <button className="group flex items-center gap-2 px-6 py-2.5 font-medium hover:text-green-600 transition">
                       {slide.buttonText2}
-                      <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
+                      <CloudinaryImage className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
                     </button>
                   </Link>
                 </div>
               </div>
             </div>
             <div className="flex items-center flex-1 justify-center">
-              <Image
+              <CloudinaryImage
                 className="md:w-72 w-48 rounded-lg shadow-lg"
                 src={slide.imgSrc}
                 alt={`Slide ${index + 1}`}
@@ -92,16 +92,13 @@ const HeaderSlider = () => {
           </div>
         ))}
       </div>
-
-      <div className="flex items-center justify-center gap-2 mt-8">
-        {sliderData.map((_, index) => (
-          <div
-            key={index}
-            onClick={() => handleSlideChange(index)}
-            className={`h-2 w-2 rounded-full cursor-pointer transition ${
-              currentSlide === index ? "bg-green-600" : "bg-gray-500/30"
-            }`}
-          ></div>
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {sliderData.map((_, idx) => (
+          <button
+            key={idx}
+            className={`w-3 h-3 rounded-full ${currentSlide === idx ? 'bg-green-600' : 'bg-gray-300'}`}
+            onClick={() => handleSlideChange(idx)}
+          />
         ))}
       </div>
     </div>

@@ -5,6 +5,7 @@ import OrderSummary from "@/components/OrderSummary";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { useAppContext } from "@/context/AppContext";
+import SEO from '@/components/SEO';
 
 const Cart = () => {
 
@@ -12,6 +13,22 @@ const Cart = () => {
 
   return (
     <>
+      <SEO
+        title="Shopping Cart | Abronia Lizards"
+        description="View and manage your shopping cart items"
+        canonical="https://abronializards.com/cart"
+        url="https://abronializards.com/cart"
+        robots="noindex, nofollow"
+        openGraph={{
+          type: 'website',
+          siteName: 'Abronia Lizards',
+        }}
+        twitter={{
+          card: 'summary_large_image',
+          site: '@abronializards',
+          creator: '@abronializards',
+        }}
+      />
       <Navbar />
       <div className="flex flex-col md:flex-row gap-10 px-6 md:px-16 lg:px-32 pt-14 mb-20">
         <div className="flex-1">

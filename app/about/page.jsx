@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "@/components/CloudinaryImage";
 import SEO from '@/components/SEO';
 
 export const metadata = {
@@ -22,6 +22,7 @@ const AboutPage = () => {
         canonical="https://abronializards.com/about"
         url="https://abronializards.com/about"
         image="https://ik.imagekit.io/14iir4o77/IMG_9610.png?updatedAt=1748940318208"
+        robots="index, follow"
         openGraph={{
           type: 'website',
           siteName: 'Abronia Lizards',
@@ -82,7 +83,7 @@ const AboutPage = () => {
                 </div>
               </div>
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-                <Image
+                <CloudinaryImage
                   src={assets.abronia_graminea_habitat_image}
                   alt="Abronia Graminea"
                   width={600}

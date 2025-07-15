@@ -1,10 +1,11 @@
 'use client'
 import React, { useState } from "react";
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import SEO from '@/components/SEO';
 
 const AddProduct = () => {
 
@@ -67,6 +68,23 @@ const AddProduct = () => {
   };
 
   return (
+    <>
+      <SEO
+        title="Seller Dashboard | Abronia Lizards"
+        description="Seller dashboard for managing products and orders"
+        canonical="https://abronializards.com/seller"
+        url="https://abronializards.com/seller"
+        robots="noindex, nofollow"
+        openGraph={{
+          type: 'website',
+          siteName: 'Abronia Lizards',
+        }}
+        twitter={{
+          card: 'summary_large_image',
+          site: '@abronializards',
+          creator: '@abronializards',
+        }}
+      />
     <div className="flex-1 min-h-screen flex flex-col justify-between">
       <form onSubmit={handleSubmit} className="md:p-10 p-4 space-y-5 max-w-lg">
         <div>
@@ -80,7 +98,7 @@ const AddProduct = () => {
                   updatedFiles[index] = e.target.files[0];
                   setFiles(updatedFiles);
                 }} type="file" id={`image${index}`} hidden />
-                <Image
+                <CloudinaryImage
                   key={index}
                   className="max-w-24 cursor-pointer"
                   src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area}
@@ -199,6 +217,7 @@ const AddProduct = () => {
       </form>
       {/* <Footer /> */}
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import SEO from '@/components/SEO';
 
 const AddAddress = () => {
     const { getToken, router } = useAppContext();
@@ -45,6 +46,22 @@ const AddAddress = () => {
 
     return (
         <>
+            <SEO
+                title="Add Address | Abronia Lizards"
+                description="Add your shipping address for order delivery"
+                canonical="https://abronializards.com/add-address"
+                url="https://abronializards.com/add-address"
+                robots="noindex, nofollow"
+                openGraph={{
+                    type: 'website',
+                    siteName: 'Abronia Lizards',
+                }}
+                twitter={{
+                    card: 'summary_large_image',
+                    site: '@abronializards',
+                    creator: '@abronializards',
+                }}
+            />
             <Navbar />
             <div className="px-6 md:px-16 lg:px-32 py-16 flex flex-col md:flex-row justify-between">
                 <form onSubmit={onSubmitHandler} className="w-full">
