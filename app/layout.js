@@ -101,6 +101,15 @@ export default function RootLayout({ children }) {
             />
           </AppContextProvider>
         </body>
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4Y2FMS7J8R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4Y2FMS7J8R');
+</script>
       </html>
     </ClerkProvider>
   );
